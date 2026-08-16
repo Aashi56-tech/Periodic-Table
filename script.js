@@ -1,4 +1,5 @@
 const elements = [
+
     [1,"H","Hydrogen",1.008,"nonmetal",1,1],
     [2,"He","Helium",4.003,"noble",1,18],
 
@@ -129,33 +130,28 @@ const elements = [
     [103,"Lr","Lawrencium",266,"actinide",9,17]
 ];
 
-const facts = {
-    H: ["Hydrogen is the lightest element and the most abundant element in the universe.", "1s¹"],
-    He: ["Helium is a noble gas commonly used in balloons.", "1s²"],
-    C: ["Carbon is the basis of many compounds found in living organisms.", "1s² 2s² 2p²"],
-    O: ["Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.", "1s² 2s² 2p⁴"],
-    Na: ["Sodium is a highly reactive alkali metal.", "[Ne] 3s¹"],
-    Cl: ["Chlorine is a reactive halogen commonly used to disinfect water.", "[Ne] 3s² 3p⁵"],
-    Fe: ["Iron is an important metal used in construction and manufacturing.", "[Ar] 3d⁶ 4s²"],
-    Cu: ["Copper is an excellent conductor of electricity.", "[Ar] 3d¹⁰ 4s¹"],
-    Ag: ["Silver has the highest electrical conductivity of any element.", "[Kr] 4d¹⁰ 5s¹"],
-    Au: ["Gold is a highly unreactive metal and has been valued for thousands of years.", "[Xe] 4f¹⁴ 5d¹⁰ 6s¹"],
-    Hg: ["Mercury is a metal that is liquid at room temperature.", "[Xe] 4f¹⁴ 5d¹⁰ 6s²"],
-    U: ["Uranium is a naturally occurring radioactive element.", "[Rn] 5f³ 6d¹ 7s²"]
-};
-
 const table = document.getElementById("periodic-table");
 const infoBox = document.getElementById("info-box");
 const search = document.getElementById("search");
 const darkMode = document.getElementById("darkMode");
 
+
+// CREATE PERIODIC TABLE
 function displayElements(list) {
 
     table.innerHTML = "";
 
     list.forEach(element => {
 
-        const [number, symbol, name, mass, category, period, group] = element;
+        const [
+            number,
+            symbol,
+            name,
+            mass,
+            category,
+            period,
+            group
+        ] = element;
 
         const box = document.createElement("div");
 
@@ -172,29 +168,71 @@ function displayElements(list) {
 
         box.addEventListener("click", () => {
 
-            const fact =
+            const factData =
                 window.facts && window.facts[symbol]
                     ? window.facts[symbol]
-                    : "Interesting information about this element will be added soon.";
+                    : null;
+
+            let factText =
+                "Interesting information about this element will be added soon.";
+
+            let electronConfig = "";
+
+            if (factData) {
+
+                if (Array.isArray(factData)) {
+                    factText = factData[0];
+                    electronConfig = factData[1] || "";
+                } else {
+                    factText = factData;
+                }
+
+            }
 
             infoBox.innerHTML = `
                 <h2>${name} (${symbol})</h2>
 
-                <p><strong>Atomic Number:</strong> ${number}</p>
+                <p>
+                    <strong>Atomic Number:</strong>
+                    ${number}
+                </p>
 
-                <p><strong>Atomic Mass:</strong> ${mass}</p>
+                <p>
+                    <strong>Atomic Mass:</strong>
+                    ${mass}
+                </p>
 
-                <p><strong>Category:</strong> ${category}</p>
+                <p>
+                    <strong>Category:</strong>
+                    ${category}
+                </p>
 
-                <p><strong>Period:</strong> ${period}</p>
+                <p>
+                    <strong>Period:</strong>
+                    ${period}
+                </p>
 
-                <p><strong>Group:</strong> ${group}</p>
+                <p>
+                    <strong>Group:</strong>
+                    ${group}
+                </p>
+
+                ${
+                    electronConfig
+                    ? `
+                    <p>
+                        <strong>Electron Configuration:</strong>
+                        ${electronConfig}
+                    </p>
+                    `
+                    : ""
+                }
 
                 <hr>
 
-                <h3>💡 Did you know?</h3>
+                <h3>💡 Did You Know?</h3>
 
-                <p>${fact}</p>
+                <p>${factText}</p>
             `;
 
             infoBox.scrollIntoView({
@@ -205,20 +243,28 @@ function displayElements(list) {
         });
 
         table.appendChild(box);
+
     });
 }
 
 
-// SHOW ALL ELEMENTS
+// DISPLAY ALL 118 ELEMENTS
 displayElements(elements);
 
 
-// SEARCH
+// SEARCH FUNCTION
 search.addEventListener("input", () => {
 
     const value = search.value
         .toLowerCase()
         .trim();
+
+    if (value === "") {
+
+        displayElements(elements);
+
+        return;
+    }
 
     const filtered = elements.filter(element => {
 
@@ -235,9 +281,11 @@ search.addEventListener("input", () => {
             symbol.includes(value) ||
             number === value
         );
+
     });
 
     displayElements(filtered);
+
 });
 
 
