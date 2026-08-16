@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Interactive Periodic Table</title>
 
@@ -12,11 +16,20 @@
 
 <body>
 
-<header>
+    <!-- HEADER -->
 
-    <h1>🧪 Interactive Periodic Table</h1>
+    <header>
 
-    <p>Explore all 118 chemical elements</p>
+        <h1>🧪 Interactive Periodic Table</h1>
+
+        <p>
+            Explore all 118 chemical elements
+        </p>
+
+    </header>
+
+
+    <!-- CONTROLS -->
 
     <div class="controls">
 
@@ -30,55 +43,131 @@
             🌙 Dark Mode
         </button>
 
+        <button id="quizMode">
+            🧠 Quiz Mode
+        </button>
+
     </div>
 
-</header>
 
-<main>
+    <!-- CATEGORY LEGEND -->
 
     <section class="legend">
 
         <h2>Element Categories</h2>
 
-        <div class="legend-container">
+        <div class="legend-items">
 
-            <span><i class="legend-box alkali"></i> Alkali Metals</span>
-            <span><i class="legend-box alkaline"></i> Alkaline Earth Metals</span>
-            <span><i class="legend-box transition"></i> Transition Metals</span>
-            <span><i class="legend-box post-transition"></i> Post-Transition Metals</span>
-            <span><i class="legend-box metalloid"></i> Metalloids</span>
-            <span><i class="legend-box nonmetal"></i> Nonmetals</span>
-            <span><i class="legend-box halogen"></i> Halogens</span>
-            <span><i class="legend-box noble"></i> Noble Gases</span>
-            <span><i class="legend-box lanthanide"></i> Lanthanides</span>
-            <span><i class="legend-box actinide"></i> Actinides</span>
+            <span>
+                <span class="legend-color alkali"></span>
+                Alkali Metals
+            </span>
+
+            <span>
+                <span class="legend-color alkaline"></span>
+                Alkaline Earth Metals
+            </span>
+
+            <span>
+                <span class="legend-color transition"></span>
+                Transition Metals
+            </span>
+
+            <span>
+                <span class="legend-color post-transition"></span>
+                Post-Transition Metals
+            </span>
+
+            <span>
+                <span class="legend-color metalloid"></span>
+                Metalloids
+            </span>
+
+            <span>
+                <span class="legend-color nonmetal"></span>
+                Nonmetals
+            </span>
+
+            <span>
+                <span class="legend-color halogen"></span>
+                Halogens
+            </span>
+
+            <span>
+                <span class="legend-color noble"></span>
+                Noble Gases
+            </span>
+
+            <span>
+                <span class="legend-color lanthanide"></span>
+                Lanthanides
+            </span>
+
+            <span>
+                <span class="legend-color actinide"></span>
+                Actinides
+            </span>
 
         </div>
 
     </section>
 
-    <div class="table-wrapper">
+
+    <!-- PERIODIC TABLE -->
+
+    <main>
+
         <div id="periodic-table"></div>
-    </div>
+
+    </main>
+
+
+    <!-- ELEMENT INFORMATION -->
 
     <section id="info-box">
 
         <h2>Select an Element</h2>
 
-        <p>Click any element to see its information.</p>
+        <p>
+            Click on any element to see its information.
+        </p>
 
     </section>
 
-</main>
 
-<footer>
+    <!-- QUIZ -->
 
-    <p>Interactive Periodic Table • HTML • CSS • JavaScript</p>
+    <section id="quiz-box" class="hidden">
 
-</footer>
+        <h2>🧠 Element Quiz</h2>
+
+        <p id="score">
+            Score: 0
+        </p>
+
+        <h3 id="question">
+            Question will appear here
+        </h3>
+
+        <div id="answers"></div>
+
+        <p id="quiz-result"></p>
+
+        <button id="next-question">
+            Next Question →
+        </button>
+
+        <button id="exit-quiz">
+            Exit Quiz
+        </button>
+
+    </section>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
 
 </body>
-</html>
 
-<script src="facts.js"></script>
-<script src="script.js"></script>
+</html>
