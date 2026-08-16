@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,19 +23,18 @@
         <input
             type="text"
             id="search"
-            placeholder="🔎 Search element, symbol or atomic number..."
+            placeholder="🔎 Search element..."
         >
 
-        <button id="darkMode">🌙 Dark Mode</button>
+        <button id="darkMode">
+            🌙 Dark Mode
+        </button>
 
     </div>
 
 </header>
 
-
 <main>
-
-    <!-- Category Legend -->
 
     <section class="legend">
 
@@ -43,65 +43,42 @@
         <div class="legend-container">
 
             <span><i class="legend-box alkali"></i> Alkali Metals</span>
-
             <span><i class="legend-box alkaline"></i> Alkaline Earth Metals</span>
-
             <span><i class="legend-box transition"></i> Transition Metals</span>
-
             <span><i class="legend-box post-transition"></i> Post-Transition Metals</span>
-
             <span><i class="legend-box metalloid"></i> Metalloids</span>
-
             <span><i class="legend-box nonmetal"></i> Nonmetals</span>
-
             <span><i class="legend-box halogen"></i> Halogens</span>
-
             <span><i class="legend-box noble"></i> Noble Gases</span>
-
             <span><i class="legend-box lanthanide"></i> Lanthanides</span>
-
             <span><i class="legend-box actinide"></i> Actinides</span>
 
         </div>
 
     </section>
 
-
-    <!-- Periodic Table -->
-
-    <section>
-
+    <div class="table-wrapper">
         <div id="periodic-table"></div>
-
-    </section>
-
-
-    <!-- Element Information -->
+    </div>
 
     <section id="info-box">
 
         <h2>Select an Element</h2>
 
-        <p>
-            Click on any element to see its information.
-        </p>
+        <p>Click any element to see its information.</p>
 
     </section>
 
 </main>
 
-
 <footer>
 
-    <p>
-        Interactive Periodic Table • Built with HTML, CSS & JavaScript
-    </p>
+    <p>Interactive Periodic Table • HTML • CSS • JavaScript</p>
 
 </footer>
 
-
 <script src="facts.js"></script>
 <script src="script.js"></script>
-    
+
 </body>
 </html>
