@@ -1,148 +1,173 @@
 const elements = [
     // Period 1
-    {n:1,s:"H",name:"Hydrogen",mass:1.008,c:"nonmetal",p:1,g:1},
-    {n:2,s:"He",name:"Helium",mass:4.003,c:"noble",p:1,g:18},
+    [1,"H","Hydrogen",1.008,"nonmetal",1,1],
+    [2,"He","Helium",4.003,"noble",1,18],
 
     // Period 2
-    {n:3,s:"Li",name:"Lithium",mass:6.94,c:"alkali",p:2,g:1},
-    {n:4,s:"Be",name:"Beryllium",mass:9.012,c:"alkaline",p:2,g:2},
-    {n:5,s:"B",name:"Boron",mass:10.81,c:"metalloid",p:2,g:13},
-    {n:6,s:"C",name:"Carbon",mass:12.011,c:"nonmetal",p:2,g:14},
-    {n:7,s:"N",name:"Nitrogen",mass:14.007,c:"nonmetal",p:2,g:15},
-    {n:8,s:"O",name:"Oxygen",mass:15.999,c:"nonmetal",p:2,g:16},
-    {n:9,s:"F",name:"Fluorine",mass:18.998,c:"halogen",p:2,g:17},
-    {n:10,s:"Ne",name:"Neon",mass:20.180,c:"noble",p:2,g:18},
+    [3,"Li","Lithium",6.94,"alkali",2,1],
+    [4,"Be","Beryllium",9.012,"alkaline",2,2],
+    [5,"B","Boron",10.81,"metalloid",2,13],
+    [6,"C","Carbon",12.011,"nonmetal",2,14],
+    [7,"N","Nitrogen",14.007,"nonmetal",2,15],
+    [8,"O","Oxygen",15.999,"nonmetal",2,16],
+    [9,"F","Fluorine",18.998,"halogen",2,17],
+    [10,"Ne","Neon",20.180,"noble",2,18],
 
     // Period 3
-    {n:11,s:"Na",name:"Sodium",mass:22.990,c:"alkali",p:3,g:1},
-    {n:12,s:"Mg",name:"Magnesium",mass:24.305,c:"alkaline",p:3,g:2},
-    {n:13,s:"Al",name:"Aluminium",mass:26.982,c:"post-transition",p:3,g:13},
-    {n:14,s:"Si",name:"Silicon",mass:28.085,c:"metalloid",p:3,g:14},
-    {n:15,s:"P",name:"Phosphorus",mass:30.974,c:"nonmetal",p:3,g:15},
-    {n:16,s:"S",name:"Sulfur",mass:32.06,c:"nonmetal",p:3,g:16},
-    {n:17,s:"Cl",name:"Chlorine",mass:35.45,c:"halogen",p:3,g:17},
-    {n:18,s:"Ar",name:"Argon",mass:39.948,c:"noble",p:3,g:18},
+    [11,"Na","Sodium",22.990,"alkali",3,1],
+    [12,"Mg","Magnesium",24.305,"alkaline",3,2],
+    [13,"Al","Aluminium",26.982,"post-transition",3,13],
+    [14,"Si","Silicon",28.085,"metalloid",3,14],
+    [15,"P","Phosphorus",30.974,"nonmetal",3,15],
+    [16,"S","Sulfur",32.06,"nonmetal",3,16],
+    [17,"Cl","Chlorine",35.45,"halogen",3,17],
+    [18,"Ar","Argon",39.948,"noble",3,18],
 
     // Period 4
-    {n:19,s:"K",name:"Potassium",mass:39.098,c:"alkali",p:4,g:1},
-    {n:20,s:"Ca",name:"Calcium",mass:40.078,c:"alkaline",p:4,g:2},
-    {n:21,s:"Sc",name:"Scandium",mass:44.956,c:"transition",p:4,g:3},
-    {n:22,s:"Ti",name:"Titanium",mass:47.867,c:"transition",p:4,g:4},
-    {n:23,s:"V",name:"Vanadium",mass:50.942,c:"transition",p:4,g:5},
-    {n:24,s:"Cr",name:"Chromium",mass:51.996,c:"transition",p:4,g:6},
-    {n:25,s:"Mn",name:"Manganese",mass:54.938,c:"transition",p:4,g:7},
-    {n:26,s:"Fe",name:"Iron",mass:55.845,c:"transition",p:4,g:8},
-    {n:27,s:"Co",name:"Cobalt",mass:58.933,c:"transition",p:4,g:9},
-    {n:28,s:"Ni",name:"Nickel",mass:58.693,c:"transition",p:4,g:10},
-    {n:29,s:"Cu",name:"Copper",mass:63.546,c:"transition",p:4,g:11},
-    {n:30,s:"Zn",name:"Zinc",mass:65.38,c:"transition",p:4,g:12},
-    {n:31,s:"Ga",name:"Gallium",mass:69.723,c:"post-transition",p:4,g:13},
-    {n:32,s:"Ge",name:"Germanium",mass:72.630,c:"metalloid",p:4,g:14},
-    {n:33,s:"As",name:"Arsenic",mass:74.922,c:"metalloid",p:4,g:15},
-    {n:34,s:"Se",name:"Selenium",mass:78.971,c:"nonmetal",p:4,g:16},
-    {n:35,s:"Br",name:"Bromine",mass:79.904,c:"halogen",p:4,g:17},
-    {n:36,s:"Kr",name:"Krypton",mass:83.798,c:"noble",p:4,g:18},
+    [19,"K","Potassium",39.098,"alkali",4,1],
+    [20,"Ca","Calcium",40.078,"alkaline",4,2],
+    [21,"Sc","Scandium",44.956,"transition",4,3],
+    [22,"Ti","Titanium",47.867,"transition",4,4],
+    [23,"V","Vanadium",50.942,"transition",4,5],
+    [24,"Cr","Chromium",51.996,"transition",4,6],
+    [25,"Mn","Manganese",54.938,"transition",4,7],
+    [26,"Fe","Iron",55.845,"transition",4,8],
+    [27,"Co","Cobalt",58.933,"transition",4,9],
+    [28,"Ni","Nickel",58.693,"transition",4,10],
+    [29,"Cu","Copper",63.546,"transition",4,11],
+    [30,"Zn","Zinc",65.38,"transition",4,12],
+    [31,"Ga","Gallium",69.723,"post-transition",4,13],
+    [32,"Ge","Germanium",72.630,"metalloid",4,14],
+    [33,"As","Arsenic",74.922,"metalloid",4,15],
+    [34,"Se","Selenium",78.971,"nonmetal",4,16],
+    [35,"Br","Bromine",79.904,"halogen",4,17],
+    [36,"Kr","Krypton",83.798,"noble",4,18],
 
     // Period 5
-    {n:37,s:"Rb",name:"Rubidium",mass:85.468,c:"alkali",p:5,g:1},
-    {n:38,s:"Sr",name:"Strontium",mass:87.62,c:"alkaline",p:5,g:2},
-    {n:39,s:"Y",name:"Yttrium",mass:88.906,c:"transition",p:5,g:3},
-    {n:40,s:"Zr",name:"Zirconium",mass:91.224,c:"transition",p:5,g:4},
-    {n:41,s:"Nb",name:"Niobium",mass:92.906,c:"transition",p:5,g:5},
-    {n:42,s:"Mo",name:"Molybdenum",mass:95.95,c:"transition",p:5,g:6},
-    {n:43,s:"Tc",name:"Technetium",mass:98,c:"transition",p:5,g:7},
-    {n:44,s:"Ru",name:"Ruthenium",mass:101.07,c:"transition",p:5,g:8},
-    {n:45,s:"Rh",name:"Rhodium",mass:102.91,c:"transition",p:5,g:9},
-    {n:46,s:"Pd",name:"Palladium",mass:106.42,c:"transition",p:5,g:10},
-    {n:47,s:"Ag",name:"Silver",mass:107.87,c:"transition",p:5,g:11},
-    {n:48,s:"Cd",name:"Cadmium",mass:112.41,c:"transition",p:5,g:12},
-    {n:49,s:"In",name:"Indium",mass:114.82,c:"post-transition",p:5,g:13},
-    {n:50,s:"Sn",name:"Tin",mass:118.71,c:"post-transition",p:5,g:14},
-    {n:51,s:"Sb",name:"Antimony",mass:121.76,c:"metalloid",p:5,g:15},
-    {n:52,s:"Te",name:"Tellurium",mass:127.60,c:"metalloid",p:5,g:16},
-    {n:53,s:"I",name:"Iodine",mass:126.90,c:"halogen",p:5,g:17},
-    {n:54,s:"Xe",name:"Xenon",mass:131.29,c:"noble",p:5,g:18},
+    [37,"Rb","Rubidium",85.468,"alkali",5,1],
+    [38,"Sr","Strontium",87.62,"alkaline",5,2],
+    [39,"Y","Yttrium",88.906,"transition",5,3],
+    [40,"Zr","Zirconium",91.224,"transition",5,4],
+    [41,"Nb","Niobium",92.906,"transition",5,5],
+    [42,"Mo","Molybdenum",95.95,"transition",5,6],
+    [43,"Tc","Technetium",98,"transition",5,7],
+    [44,"Ru","Ruthenium",101.07,"transition",5,8],
+    [45,"Rh","Rhodium",102.91,"transition",5,9],
+    [46,"Pd","Palladium",106.42,"transition",5,10],
+    [47,"Ag","Silver",107.87,"transition",5,11],
+    [48,"Cd","Cadmium",112.41,"transition",5,12],
+    [49,"In","Indium",114.82,"post-transition",5,13],
+    [50,"Sn","Tin",118.71,"post-transition",5,14],
+    [51,"Sb","Antimony",121.76,"metalloid",5,15],
+    [52,"Te","Tellurium",127.60,"metalloid",5,16],
+    [53,"I","Iodine",126.90,"halogen",5,17],
+    [54,"Xe","Xenon",131.29,"noble",5,18],
 
     // Period 6
-    {n:55,s:"Cs",name:"Caesium",mass:132.91,c:"alkali",p:6,g:1},
-    {n:56,s:"Ba",name:"Barium",mass:137.33,c:"alkaline",p:6,g:2},
-    {n:57,s:"La",name:"Lanthanum",mass:138.91,c:"lanthanide",p:6,g:3},
-    {n:72,s:"Hf",name:"Hafnium",mass:178.49,c:"transition",p:6,g:4},
-    {n:73,s:"Ta",name:"Tantalum",mass:180.95,c:"transition",p:6,g:5},
-    {n:74,s:"W",name:"Tungsten",mass:183.84,c:"transition",p:6,g:6},
-    {n:75,s:"Re",name:"Rhenium",mass:186.21,c:"transition",p:6,g:7},
-    {n:76,s:"Os",name:"Osmium",mass:190.23,c:"transition",p:6,g:8},
-    {n:77,s:"Ir",name:"Iridium",mass:192.22,c:"transition",p:6,g:9},
-    {n:78,s:"Pt",name:"Platinum",mass:195.08,c:"transition",p:6,g:10},
-    {n:79,s:"Au",name:"Gold",mass:196.97,c:"transition",p:6,g:11},
-    {n:80,s:"Hg",name:"Mercury",mass:200.59,c:"transition",p:6,g:12},
-    {n:81,s:"Tl",name:"Thallium",mass:204.38,c:"post-transition",p:6,g:13},
-    {n:82,s:"Pb",name:"Lead",mass:207.2,c:"post-transition",p:6,g:14},
-    {n:83,s:"Bi",name:"Bismuth",mass:208.98,c:"post-transition",p:6,g:15},
-    {n:84,s:"Po",name:"Polonium",mass:209,c:"post-transition",p:6,g:16},
-    {n:85,s:"At",name:"Astatine",mass:210,c:"halogen",p:6,g:17},
-    {n:86,s:"Rn",name:"Radon",mass:222,c:"noble",p:6,g:18},
+    [55,"Cs","Caesium",132.91,"alkali",6,1],
+    [56,"Ba","Barium",137.33,"alkaline",6,2],
+    [57,"La","Lanthanum",138.91,"lanthanide",6,3],
+    [72,"Hf","Hafnium",178.49,"transition",6,4],
+    [73,"Ta","Tantalum",180.95,"transition",6,5],
+    [74,"W","Tungsten",183.84,"transition",6,6],
+    [75,"Re","Rhenium",186.21,"transition",6,7],
+    [76,"Os","Osmium",190.23,"transition",6,8],
+    [77,"Ir","Iridium",192.22,"transition",6,9],
+    [78,"Pt","Platinum",195.08,"transition",6,10],
+    [79,"Au","Gold",196.97,"transition",6,11],
+    [80,"Hg","Mercury",200.59,"transition",6,12],
+    [81,"Tl","Thallium",204.38,"post-transition",6,13],
+    [82,"Pb","Lead",207.2,"post-transition",6,14],
+    [83,"Bi","Bismuth",208.98,"post-transition",6,15],
+    [84,"Po","Polonium",209,"post-transition",6,16],
+    [85,"At","Astatine",210,"halogen",6,17],
+    [86,"Rn","Radon",222,"noble",6,18],
 
     // Period 7
-    {n:87,s:"Fr",name:"Francium",mass:223,c:"alkali",p:7,g:1},
-    {n:88,s:"Ra",name:"Radium",mass:226,c:"alkaline",p:7,g:2},
-    {n:89,s:"Ac",name:"Actinium",mass:227,c:"actinide",p:7,g:3},
-    {n:104,s:"Rf",name:"Rutherfordium",mass:267,c:"transition",p:7,g:4},
-    {n:105,s:"Db",name:"Dubnium",mass:268,c:"transition",p:7,g:5},
-    {n:106,s:"Sg",name:"Seaborgium",mass:269,c:"transition",p:7,g:6},
-    {n:107,s:"Bh",name:"Bohrium",mass:270,c:"transition",p:7,g:7},
-    {n:108,s:"Hs",name:"Hassium",mass:277,c:"transition",p:7,g:8},
-    {n:109,s:"Mt",name:"Meitnerium",mass:278,c:"transition",p:7,g:9},
-    {n:110,s:"Ds",name:"Darmstadtium",mass:281,c:"transition",p:7,g:10},
-    {n:111,s:"Rg",name:"Roentgenium",mass:282,c:"transition",p:7,g:11},
-    {n:112,s:"Cn",name:"Copernicium",mass:285,c:"transition",p:7,g:12},
-    {n:113,s:"Nh",name:"Nihonium",mass:286,c:"post-transition",p:7,g:13},
-    {n:114,s:"Fl",name:"Flerovium",mass:289,c:"post-transition",p:7,g:14},
-    {n:115,s:"Mc",name:"Moscovium",mass:290,c:"post-transition",p:7,g:15},
-    {n:116,s:"Lv",name:"Livermorium",mass:293,c:"post-transition",p:7,g:16},
-    {n:117,s:"Ts",name:"Tennessine",mass:294,c:"halogen",p:7,g:17},
-    {n:118,s:"Og",name:"Oganesson",mass:294,c:"noble",p:7,g:18}
+    [87,"Fr","Francium",223,"alkali",7,1],
+    [88,"Ra","Radium",226,"alkaline",7,2],
+    [89,"Ac","Actinium",227,"actinide",7,3],
+    [104,"Rf","Rutherfordium",267,"transition",7,4],
+    [105,"Db","Dubnium",268,"transition",7,5],
+    [106,"Sg","Seaborgium",269,"transition",7,6],
+    [107,"Bh","Bohrium",270,"transition",7,7],
+    [108,"Hs","Hassium",277,"transition",7,8],
+    [109,"Mt","Meitnerium",278,"transition",7,9],
+    [110,"Ds","Darmstadtium",281,"transition",7,10],
+    [111,"Rg","Roentgenium",282,"transition",7,11],
+    [112,"Cn","Copernicium",285,"transition",7,12],
+    [113,"Nh","Nihonium",286,"post-transition",7,13],
+    [114,"Fl","Flerovium",289,"post-transition",7,14],
+    [115,"Mc","Moscovium",290,"post-transition",7,15],
+    [116,"Lv","Livermorium",293,"post-transition",7,16],
+    [117,"Ts","Tennessine",294,"halogen",7,17],
+    [118,"Og","Oganesson",294,"noble",7,18],
+
+    // Lanthanides
+    [58,"Ce","Cerium",140.12,"lanthanide",8,4],
+    [59,"Pr","Praseodymium",140.91,"lanthanide",8,5],
+    [60,"Nd","Neodymium",144.24,"lanthanide",8,6],
+    [61,"Pm","Promethium",145,"lanthanide",8,7],
+    [62,"Sm","Samarium",150.36,"lanthanide",8,8],
+    [63,"Eu","Europium",151.96,"lanthanide",8,9],
+    [64,"Gd","Gadolinium",157.25,"lanthanide",8,10],
+    [65,"Tb","Terbium",158.93,"lanthanide",8,11],
+    [66,"Dy","Dysprosium",162.50,"lanthanide",8,12],
+    [67,"Ho","Holmium",164.93,"lanthanide",8,13],
+    [68,"Er","Erbium",167.26,"lanthanide",8,14],
+    [69,"Tm","Thulium",168.93,"lanthanide",8,15],
+    [70,"Yb","Ytterbium",173.05,"lanthanide",8,16],
+    [71,"Lu","Lutetium",174.97,"lanthanide",8,17],
+
+    // Actinides
+    [90,"Th","Thorium",232.04,"actinide",9,4],
+    [91,"Pa","Protactinium",231.04,"actinide",9,5],
+    [92,"U","Uranium",238.03,"actinide",9,6],
+    [93,"Np","Neptunium",237,"actinide",9,7],
+    [94,"Pu","Plutonium",244,"actinide",9,8],
+    [95,"Am","Americium",243,"actinide",9,9],
+    [96,"Cm","Curium",247,"actinide",9,10],
+    [97,"Bk","Berkelium",247,"actinide",9,11],
+    [98,"Cf","Californium",251,"actinide",9,12],
+    [99,"Es","Einsteinium",252,"actinide",9,13],
+    [100,"Fm","Fermium",257,"actinide",9,14],
+    [101,"Md","Mendelevium",258,"actinide",9,15],
+    [102,"No","Nobelium",259,"actinide",9,16],
+    [103,"Lr","Lawrencium",266,"actinide",9,17]
 ];
 
 const table = document.getElementById("periodic-table");
 const infoBox = document.getElementById("info-box");
 const search = document.getElementById("search");
+const darkMode = document.getElementById("darkMode");
 
 function displayElements(list) {
-
     table.innerHTML = "";
 
     list.forEach(element => {
+        const [number, symbol, name, mass, category, period, group] = element;
 
         const box = document.createElement("div");
 
-        box.className = `element ${element.c}`;
-
-        box.style.gridRow = element.p;
-        box.style.gridColumn = element.g;
+        box.className = `element ${category}`;
+        box.style.gridRow = period;
+        box.style.gridColumn = group;
 
         box.innerHTML = `
-            <span class="number">${element.n}</span>
-            <span class="symbol">${element.s}</span>
-            <span class="name">${element.name}</span>
+            <span class="number">${number}</span>
+            <span class="symbol">${symbol}</span>
+            <span class="name">${name}</span>
         `;
 
         box.addEventListener("click", () => {
-
             infoBox.innerHTML = `
-                <h2>${element.name} (${element.s})</h2>
-
-                <p><strong>Atomic Number:</strong> ${element.n}</p>
-
-                <p><strong>Atomic Mass:</strong> ${element.mass}</p>
-
-                <p><strong>Category:</strong> ${element.c}</p>
-
-                <p><strong>Period:</strong> ${element.p}</p>
-
-                <p><strong>Group:</strong> ${element.g}</p>
+                <h2>${name} (${symbol})</h2>
+                <p><strong>Atomic Number:</strong> ${number}</p>
+                <p><strong>Atomic Mass:</strong> ${mass}</p>
+                <p><strong>Category:</strong> ${category}</p>
+                <p><strong>Period:</strong> ${period}</p>
+                <p><strong>Group:</strong> ${group}</p>
             `;
-
         });
 
         table.appendChild(box);
@@ -152,28 +177,28 @@ function displayElements(list) {
 displayElements(elements);
 
 
-/* Search */
+// SEARCH
+search.addEventListener("input", function () {
+    const value = search.value.toLowerCase().trim();
 
-search.addEventListener("input", () => {
+    const filtered = elements.filter(element => {
+        const symbol = element[1].toLowerCase();
+        const name = element[2].toLowerCase();
+        const number = element[0].toString();
 
-    const value = search.value.toLowerCase();
-
-    const filtered = elements.filter(element =>
-        element.name.toLowerCase().includes(value) ||
-        element.s.toLowerCase().includes(value) ||
-        element.n.toString() === value
-    );
+        return (
+            name.includes(value) ||
+            symbol.includes(value) ||
+            number === value
+        );
+    });
 
     displayElements(filtered);
 });
 
 
-/* Dark Mode */
-
-const darkMode = document.getElementById("darkMode");
-
-darkMode.addEventListener("click", () => {
-
+// DARK MODE
+darkMode.addEventListener("click", function () {
     document.body.classList.toggle("dark");
 
     if (document.body.classList.contains("dark")) {
@@ -181,5 +206,4 @@ darkMode.addEventListener("click", () => {
     } else {
         darkMode.textContent = "🌙 Dark Mode";
     }
-
 });
