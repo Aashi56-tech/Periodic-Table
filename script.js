@@ -169,42 +169,31 @@ function displayElements(list) {
             <span class="symbol">${symbol}</span>
             <span class="name">${name}</span>
         `;
+{
+box.addEventListener("click", function () {
 
-        box.addEventListener("click", function () {
+    const fact = facts[symbol] || "Interesting information about this element will be added soon.";
 
-            const data = facts[symbol];
+    infoBox.innerHTML = `
+        <h2>${name} (${symbol})</h2>
 
-            const fact = data
-                ? data[0]
-                : "Interesting information about this element will be added soon.";
+        <p><strong>Atomic Number:</strong> ${number}</p>
 
-            const electron = data
-                ? data[1]
-                : "Information coming soon.";
+        <p><strong>Atomic Mass:</strong> ${mass}</p>
 
-            infoBox.innerHTML = `
-                <h2>${name} (${symbol})</h2>
+        <p><strong>Category:</strong> ${category}</p>
 
-                <p><strong>Atomic Number:</strong> ${number}</p>
+        <p><strong>Period:</strong> ${period}</p>
 
-                <p><strong>Atomic Mass:</strong> ${mass}</p>
+        <p><strong>Group:</strong> ${group}</p>
 
-                <p><strong>Category:</strong> ${category}</p>
+        <hr>
 
-                <p><strong>Period:</strong> ${period}</p>
+        <h3>💡 Did you know?</h3>
 
-                <p><strong>Group:</strong> ${group}</p>
-
-                <p><strong>Electron Configuration:</strong><br>
-                ${electron}</p>
-
-                <hr>
-
-                <p><strong>💡 Did you know?</strong></p>
-
-                <p>${fact}</p>
-            `;
-        });
+        <p>${fact}</p>
+    `;
+});
 
         table.appendChild(box);
     });
