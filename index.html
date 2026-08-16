@@ -3,22 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Interactive Periodic Table</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Interactive Periodic Table</h1>
-    <p class="subtitle">Click an element to see its details</p>
+    <header>
+        <h1>🧪 Interactive Periodic Table</h1>
+        <p>Explore all 118 chemical elements</p>
 
-    <div id="periodic-table"></div>
+        <input
+            type="text"
+            id="search"
+            placeholder="🔎 Search an element..."
+        >
 
-    <div id="info-box">
-        <h2>Select an Element</h2>
-        <p>Click any element above to see more information.</p>
-    </div>
+        <button id="darkMode">
+            🌙 Dark Mode
+        </button>
+    </header>
+
+    <main>
+
+        <div id="periodic-table"></div>
+
+        <section id="info-box">
+            <h2>Select an Element</h2>
+            <p>
+                Click on any element to see its information.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Made with HTML, CSS & JavaScript 🚀</p>
+    </footer>
 
     <script src="script.js"></script>
+
 </body>
 </html>
