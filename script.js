@@ -160,20 +160,102 @@ function displayElements(list) {
         `;
 
         box.addEventListener("click", () => {
-            infoBox.innerHTML = `
-                <h2>${name} (${symbol})</h2>
-                <p><strong>Atomic Number:</strong> ${number}</p>
-                <p><strong>Atomic Mass:</strong> ${mass}</p>
-                <p><strong>Category:</strong> ${category}</p>
-                <p><strong>Period:</strong> ${period}</p>
-                <p><strong>Group:</strong> ${group}</p>
-            `;
-        });
 
-        table.appendChild(box);
-    });
+    const elementFact = facts[symbol];
+
+    const factText = elementFact
+        ? elementFact.fact
+        : "Interesting information about this element will be added soon.";
+
+    const electronText = elementFact
+        ? elementFact.electron
+        : "Coming soon";
+
+    infoBox.innerHTML = `
+        <h2>${name} (${symbol})</h2>
+
+        <p><strong>Atomic Number:</strong> ${number}</p>
+
+        <p><strong>Atomic Mass:</strong> ${mass}</p>
+
+        <p><strong>Category:</strong> ${category}</p>
+
+        <p><strong>Period:</strong> ${period}</p>
+
+        <p><strong>Group:</strong> ${group}</p>
+
+        <p><strong>Electron Configuration:</strong>
+        ${electronText}</p>
+
+        <hr>
+
+        <p><strong>💡 Did you know?</strong></p>
+
+        <p>${factText}</p>
+    `;
+});
 }
+const facts = {
+    H: {
+        fact: "Hydrogen is the lightest element and the most abundant element in the universe.",
+        electron: "1s¹"
+    },
 
+    He: {
+        fact: "Helium is a noble gas and is commonly used in balloons.",
+        electron: "1s²"
+    },
+
+    C: {
+        fact: "Carbon is the basis of many compounds found in living organisms.",
+        electron: "1s² 2s² 2p²"
+    },
+
+    O: {
+        fact: "Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.",
+        electron: "1s² 2s² 2p⁴"
+    },
+
+    Na: {
+        fact: "Sodium is a highly reactive metal that reacts strongly with water.",
+        electron: "[Ne] 3s¹"
+    },
+
+    Cl: {
+        fact: "Chlorine is a reactive halogen commonly used to disinfect water.",
+        electron: "[Ne] 3s² 3p⁵"
+    },
+
+    Fe: {
+        fact: "Iron is an important metal used extensively in construction and manufacturing.",
+        electron: "[Ar] 3d⁶ 4s²"
+    },
+
+    Cu: {
+        fact: "Copper is an excellent conductor of electricity and is widely used in electrical wiring.",
+        electron: "[Ar] 3d¹⁰ 4s¹"
+    },
+
+    Ag: {
+        fact: "Silver has the highest electrical conductivity of any element.",
+        electron: "[Kr] 4d¹⁰ 5s¹"
+    },
+
+    Au: {
+        fact: "Gold is a highly unreactive metal and has been valued for thousands of years.",
+        electron: "[Xe] 4f¹⁴ 5d¹⁰ 6s¹"
+    },
+
+    Hg: {
+        fact: "Mercury is a metal that is liquid at room temperature.",
+        electron: "[Xe] 4f¹⁴ 5d¹⁰ 6s²"
+    },
+
+    U: {
+        fact: "Uranium is a naturally occurring radioactive element.",
+        electron: "[Rn] 5f³ 6d¹ 7s²"
+    }
+};
 displayElements(elements);
 
 
