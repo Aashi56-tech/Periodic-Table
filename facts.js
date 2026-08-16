@@ -129,3 +129,5 @@ Ts: "Tennessine is named after the U.S. state of Tennessee.",
 Og: "Oganesson is named after physicist Yuri Oganessian."
 
 };
+
+window.facts = facts;
