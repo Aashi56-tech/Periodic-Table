@@ -2,9 +2,13 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
     background: #f5f7fb;
     color: #222;
     transition: background 0.3s, color 0.3s;
@@ -18,32 +22,39 @@ header {
 }
 
 header h1 {
-    font-size: 40px;
     margin: 0 0 10px;
+    font-size: 40px;
 }
 
 header p {
-    font-size: 17px;
+    margin: 0;
     color: #666;
+    font-size: 17px;
 }
 
 /* CONTROLS */
 
 .controls {
+    margin-top: 25px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     gap: 10px;
     flex-wrap: wrap;
-    margin-top: 25px;
 }
 
 #search {
-    width: 330px;
+    width: min(350px, 90vw);
+
     padding: 13px 16px;
+
     border: 2px solid #bbb;
     border-radius: 10px;
+
     font-size: 15px;
+
     outline: none;
 }
 
@@ -53,13 +64,16 @@ header p {
 
 #darkMode {
     padding: 13px 18px;
+
     border: none;
     border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
+
     background: #222;
     color: white;
-    transition: 0.2s;
+
+    cursor: pointer;
+
+    font-size: 15px;
 }
 
 #darkMode:hover {
@@ -69,78 +83,112 @@ header p {
 /* LEGEND */
 
 .legend {
-    max-width: 1100px;
-    margin: 10px auto 25px;
+    max-width: 1200px;
+
+    margin: 10px auto 20px;
+
     padding: 20px;
-    text-align: center;
 }
 
 .legend h2 {
+    text-align: center;
     font-size: 20px;
-    margin-bottom: 18px;
 }
 
 .legend-container {
     display: flex;
+
     justify-content: center;
+    align-items: center;
+
     flex-wrap: wrap;
+
     gap: 10px 18px;
 }
 
 .legend-container span {
     display: flex;
     align-items: center;
+
     gap: 6px;
+
     font-size: 13px;
 }
 
 .legend-box {
     width: 15px;
     height: 15px;
+
+    display: inline-block;
+
     border: 1px solid #777;
     border-radius: 3px;
-    display: inline-block;
+}
+
+/* TABLE WRAPPER */
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: 15px 20px 30px;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 /* PERIODIC TABLE */
 
 #periodic-table {
+
     display: grid;
 
     grid-template-columns: repeat(18, 60px);
 
+    grid-template-rows: repeat(9, 68px);
+
     gap: 5px;
 
-    justify-content: center;
+    width: max-content;
 
-    padding: 20px;
-
-    overflow-x: auto;
+    margin: 0 auto;
 }
 
 /* ELEMENT */
 
 .element {
+
     width: 60px;
     height: 68px;
 
     border: 2px solid #555;
+
     border-radius: 8px;
 
-    cursor: pointer;
-
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
     align-items: center;
 
-    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+    user-select: none;
 }
 
 .element:hover {
+
     transform: scale(1.12);
+
     box-shadow: 0 5px 15px #999;
-    z-index: 5;
+
+    z-index: 10;
 }
 
 .number {
@@ -154,7 +202,9 @@ header p {
 
 .name {
     font-size: 7px;
+
     text-align: center;
+
     margin-top: 2px;
 }
 
@@ -203,9 +253,10 @@ header p {
 /* INFORMATION BOX */
 
 #info-box {
+
     max-width: 650px;
 
-    margin: 35px auto;
+    margin: 30px auto 50px;
 
     padding: 30px;
 
@@ -216,15 +267,26 @@ header p {
     text-align: center;
 
     box-shadow: 0 5px 20px #ddd;
+
+    transition: background 0.3s;
 }
 
 #info-box h2 {
     margin-top: 0;
 }
 
+#info-box hr {
+    border: none;
+
+    border-top: 1px solid #ddd;
+
+    margin: 20px 0;
+}
+
 /* FOOTER */
 
 footer {
+
     text-align: center;
 
     padding: 30px;
@@ -237,28 +299,47 @@ footer {
 /* DARK MODE */
 
 .dark {
+
     background: #121212;
+
     color: white;
 }
 
 .dark header p {
-    color: #bbb;
+    color: #aaa;
 }
 
 .dark #search {
-    background: #252525;
+
+    background: #222;
+
     color: white;
+
     border-color: #666;
 }
 
+.dark #search::placeholder {
+    color: #aaa;
+}
+
 .dark #darkMode {
+
     background: white;
+
     color: #222;
 }
 
 .dark #info-box {
+
     background: #242424;
+
     color: white;
+
+    box-shadow: 0 5px 20px #000;
+}
+
+.dark #info-box hr {
+    border-color: #555;
 }
 
 .dark footer {
@@ -269,19 +350,32 @@ footer {
 
 @media (max-width: 700px) {
 
+    header {
+        padding-top: 25px;
+    }
+
     header h1 {
         font-size: 30px;
     }
 
-    #search {
-        width: 90%;
+    header p {
+        font-size: 15px;
+    }
+
+    .table-wrapper {
+
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     #periodic-table {
-        justify-content: start;
+
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .legend {
-        padding: 15px;
+        padding: 10px 15px;
     }
+
 }
