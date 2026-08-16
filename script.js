@@ -169,51 +169,66 @@ function displayElements(list) {
             <span class="symbol">${symbol}</span>
             <span class="name">${name}</span>
         `;
-{
-box.addEventListener("click", function () {
 
-    const fact = facts[symbol] || "Interesting information about this element will be added soon.";
+        box.addEventListener("click", () => {
 
-    infoBox.innerHTML = `
-        <h2>${name} (${symbol})</h2>
+            const fact =
+                window.facts && window.facts[symbol]
+                    ? window.facts[symbol]
+                    : "Interesting information about this element will be added soon.";
 
-        <p><strong>Atomic Number:</strong> ${number}</p>
+            infoBox.innerHTML = `
+                <h2>${name} (${symbol})</h2>
 
-        <p><strong>Atomic Mass:</strong> ${mass}</p>
+                <p><strong>Atomic Number:</strong> ${number}</p>
 
-        <p><strong>Category:</strong> ${category}</p>
+                <p><strong>Atomic Mass:</strong> ${mass}</p>
 
-        <p><strong>Period:</strong> ${period}</p>
+                <p><strong>Category:</strong> ${category}</p>
 
-        <p><strong>Group:</strong> ${group}</p>
+                <p><strong>Period:</strong> ${period}</p>
 
-        <hr>
+                <p><strong>Group:</strong> ${group}</p>
 
-        <h3>💡 Did you know?</h3>
+                <hr>
 
-        <p>${fact}</p>
-    `;
-});
+                <h3>💡 Did you know?</h3>
+
+                <p>${fact}</p>
+            `;
+
+            infoBox.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        });
 
         table.appendChild(box);
     });
 }
 
 
-// Display all elements
+// SHOW ALL ELEMENTS
 displayElements(elements);
 
 
 // SEARCH
-search.addEventListener("input", function () {
+search.addEventListener("input", () => {
 
-    const value = search.value.toLowerCase().trim();
+    const value = search.value
+        .toLowerCase()
+        .trim();
 
     const filtered = elements.filter(element => {
 
-        const number = element[0].toString();
-        const symbol = element[1].toLowerCase();
-        const name = element[2].toLowerCase();
+        const number = String(element[0]);
+
+        const symbol = element[1]
+            .toLowerCase();
+
+        const name = element[2]
+            .toLowerCase();
 
         return (
             name.includes(value) ||
@@ -227,13 +242,18 @@ search.addEventListener("input", function () {
 
 
 // DARK MODE
-darkMode.addEventListener("click", function () {
+darkMode.addEventListener("click", () => {
 
     document.body.classList.toggle("dark");
 
     if (document.body.classList.contains("dark")) {
+
         darkMode.textContent = "☀️ Light Mode";
+
     } else {
+
         darkMode.textContent = "🌙 Dark Mode";
+
     }
+
 });
