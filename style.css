@@ -602,3 +602,76 @@ body.dark {
     }
 
 }
+
+/* ELECTRON SHELL DIAGRAM */
+
+.shell-diagram {
+    margin: 25px auto;
+    text-align: center;
+}
+
+.shell-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 20px auto;
+}
+
+.shell {
+    position: absolute;
+    border: 3px solid #555;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shell-1 {
+    width: 70px;
+    height: 70px;
+}
+
+.shell-2 {
+    width: 130px;
+    height: 130px;
+}
+
+.shell-3 {
+    width: 190px;
+    height: 190px;
+}
+
+.shell-4 {
+    width: 250px;
+    height: 250px;
+}
+
+.nucleus {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #ddd;
+    color: #222;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 5;
+}
+
+.shell-label {
+    margin: 6px;
+}
+
+body.dark .shell {
+    border-color: #aaa;
+}
+
+body.dark .nucleus {
+    background: #444;
+    color: white;
+}
