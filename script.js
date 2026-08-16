@@ -1,9 +1,7 @@
 const elements = [
-    // Period 1
     [1,"H","Hydrogen",1.008,"nonmetal",1,1],
     [2,"He","Helium",4.003,"noble",1,18],
 
-    // Period 2
     [3,"Li","Lithium",6.94,"alkali",2,1],
     [4,"Be","Beryllium",9.012,"alkaline",2,2],
     [5,"B","Boron",10.81,"metalloid",2,13],
@@ -13,7 +11,6 @@ const elements = [
     [9,"F","Fluorine",18.998,"halogen",2,17],
     [10,"Ne","Neon",20.180,"noble",2,18],
 
-    // Period 3
     [11,"Na","Sodium",22.990,"alkali",3,1],
     [12,"Mg","Magnesium",24.305,"alkaline",3,2],
     [13,"Al","Aluminium",26.982,"post-transition",3,13],
@@ -23,7 +20,6 @@ const elements = [
     [17,"Cl","Chlorine",35.45,"halogen",3,17],
     [18,"Ar","Argon",39.948,"noble",3,18],
 
-    // Period 4
     [19,"K","Potassium",39.098,"alkali",4,1],
     [20,"Ca","Calcium",40.078,"alkaline",4,2],
     [21,"Sc","Scandium",44.956,"transition",4,3],
@@ -37,13 +33,12 @@ const elements = [
     [29,"Cu","Copper",63.546,"transition",4,11],
     [30,"Zn","Zinc",65.38,"transition",4,12],
     [31,"Ga","Gallium",69.723,"post-transition",4,13],
-    [32,"Ge","Germanium",72.630,"metalloid",4,14],
+    [32,"Ge","Germanium",72.63,"metalloid",4,14],
     [33,"As","Arsenic",74.922,"metalloid",4,15],
     [34,"Se","Selenium",78.971,"nonmetal",4,16],
     [35,"Br","Bromine",79.904,"halogen",4,17],
     [36,"Kr","Krypton",83.798,"noble",4,18],
 
-    // Period 5
     [37,"Rb","Rubidium",85.468,"alkali",5,1],
     [38,"Sr","Strontium",87.62,"alkaline",5,2],
     [39,"Y","Yttrium",88.906,"transition",5,3],
@@ -63,10 +58,10 @@ const elements = [
     [53,"I","Iodine",126.90,"halogen",5,17],
     [54,"Xe","Xenon",131.29,"noble",5,18],
 
-    // Period 6
     [55,"Cs","Caesium",132.91,"alkali",6,1],
     [56,"Ba","Barium",137.33,"alkaline",6,2],
     [57,"La","Lanthanum",138.91,"lanthanide",6,3],
+
     [72,"Hf","Hafnium",178.49,"transition",6,4],
     [73,"Ta","Tantalum",180.95,"transition",6,5],
     [74,"W","Tungsten",183.84,"transition",6,6],
@@ -83,10 +78,10 @@ const elements = [
     [85,"At","Astatine",210,"halogen",6,17],
     [86,"Rn","Radon",222,"noble",6,18],
 
-    // Period 7
     [87,"Fr","Francium",223,"alkali",7,1],
     [88,"Ra","Radium",226,"alkaline",7,2],
     [89,"Ac","Actinium",227,"actinide",7,3],
+
     [104,"Rf","Rutherfordium",267,"transition",7,4],
     [105,"Db","Dubnium",268,"transition",7,5],
     [106,"Sg","Seaborgium",269,"transition",7,6],
@@ -103,7 +98,6 @@ const elements = [
     [117,"Ts","Tennessine",294,"halogen",7,17],
     [118,"Og","Oganesson",294,"noble",7,18],
 
-    // Lanthanides
     [58,"Ce","Cerium",140.12,"lanthanide",8,4],
     [59,"Pr","Praseodymium",140.91,"lanthanide",8,5],
     [60,"Nd","Neodymium",144.24,"lanthanide",8,6],
@@ -119,7 +113,6 @@ const elements = [
     [70,"Yb","Ytterbium",173.05,"lanthanide",8,16],
     [71,"Lu","Lutetium",174.97,"lanthanide",8,17],
 
-    // Actinides
     [90,"Th","Thorium",232.04,"actinide",9,4],
     [91,"Pa","Protactinium",231.04,"actinide",9,5],
     [92,"U","Uranium",238.03,"actinide",9,6],
@@ -136,20 +129,38 @@ const elements = [
     [103,"Lr","Lawrencium",266,"actinide",9,17]
 ];
 
+const facts = {
+    H: ["Hydrogen is the lightest element and the most abundant element in the universe.", "1s¹"],
+    He: ["Helium is a noble gas commonly used in balloons.", "1s²"],
+    C: ["Carbon is the basis of many compounds found in living organisms.", "1s² 2s² 2p²"],
+    O: ["Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.", "1s² 2s² 2p⁴"],
+    Na: ["Sodium is a highly reactive alkali metal.", "[Ne] 3s¹"],
+    Cl: ["Chlorine is a reactive halogen commonly used to disinfect water.", "[Ne] 3s² 3p⁵"],
+    Fe: ["Iron is an important metal used in construction and manufacturing.", "[Ar] 3d⁶ 4s²"],
+    Cu: ["Copper is an excellent conductor of electricity.", "[Ar] 3d¹⁰ 4s¹"],
+    Ag: ["Silver has the highest electrical conductivity of any element.", "[Kr] 4d¹⁰ 5s¹"],
+    Au: ["Gold is a highly unreactive metal and has been valued for thousands of years.", "[Xe] 4f¹⁴ 5d¹⁰ 6s¹"],
+    Hg: ["Mercury is a metal that is liquid at room temperature.", "[Xe] 4f¹⁴ 5d¹⁰ 6s²"],
+    U: ["Uranium is a naturally occurring radioactive element.", "[Rn] 5f³ 6d¹ 7s²"]
+};
+
 const table = document.getElementById("periodic-table");
 const infoBox = document.getElementById("info-box");
 const search = document.getElementById("search");
 const darkMode = document.getElementById("darkMode");
 
 function displayElements(list) {
+
     table.innerHTML = "";
 
     list.forEach(element => {
+
         const [number, symbol, name, mass, category, period, group] = element;
 
         const box = document.createElement("div");
 
         box.className = `element ${category}`;
+
         box.style.gridRow = period;
         box.style.gridColumn = group;
 
@@ -159,114 +170,61 @@ function displayElements(list) {
             <span class="name">${name}</span>
         `;
 
-        box.addEventListener("click", () => {
+        box.addEventListener("click", function () {
 
-    const elementFact = facts[symbol];
+            const data = facts[symbol];
 
-    const factText = elementFact
-        ? elementFact.fact
-        : "Interesting information about this element will be added soon.";
+            const fact = data
+                ? data[0]
+                : "Interesting information about this element will be added soon.";
 
-    const electronText = elementFact
-        ? elementFact.electron
-        : "Coming soon";
+            const electron = data
+                ? data[1]
+                : "Information coming soon.";
 
-    infoBox.innerHTML = `
-        <h2>${name} (${symbol})</h2>
+            infoBox.innerHTML = `
+                <h2>${name} (${symbol})</h2>
 
-        <p><strong>Atomic Number:</strong> ${number}</p>
+                <p><strong>Atomic Number:</strong> ${number}</p>
 
-        <p><strong>Atomic Mass:</strong> ${mass}</p>
+                <p><strong>Atomic Mass:</strong> ${mass}</p>
 
-        <p><strong>Category:</strong> ${category}</p>
+                <p><strong>Category:</strong> ${category}</p>
 
-        <p><strong>Period:</strong> ${period}</p>
+                <p><strong>Period:</strong> ${period}</p>
 
-        <p><strong>Group:</strong> ${group}</p>
+                <p><strong>Group:</strong> ${group}</p>
 
-        <p><strong>Electron Configuration:</strong>
-        ${electronText}</p>
+                <p><strong>Electron Configuration:</strong><br>
+                ${electron}</p>
 
-        <hr>
+                <hr>
 
-        <p><strong>💡 Did you know?</strong></p>
+                <p><strong>💡 Did you know?</strong></p>
 
-        <p>${factText}</p>
-    `;
-});
+                <p>${fact}</p>
+            `;
+        });
+
+        table.appendChild(box);
+    });
 }
-const facts = {
-    H: {
-        fact: "Hydrogen is the lightest element and the most abundant element in the universe.",
-        electron: "1s¹"
-    },
 
-    He: {
-        fact: "Helium is a noble gas and is commonly used in balloons.",
-        electron: "1s²"
-    },
 
-    C: {
-        fact: "Carbon is the basis of many compounds found in living organisms.",
-        electron: "1s² 2s² 2p²"
-    },
-
-    O: {
-        fact: "Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.",
-        electron: "1s² 2s² 2p⁴"
-    },
-
-    Na: {
-        fact: "Sodium is a highly reactive metal that reacts strongly with water.",
-        electron: "[Ne] 3s¹"
-    },
-
-    Cl: {
-        fact: "Chlorine is a reactive halogen commonly used to disinfect water.",
-        electron: "[Ne] 3s² 3p⁵"
-    },
-
-    Fe: {
-        fact: "Iron is an important metal used extensively in construction and manufacturing.",
-        electron: "[Ar] 3d⁶ 4s²"
-    },
-
-    Cu: {
-        fact: "Copper is an excellent conductor of electricity and is widely used in electrical wiring.",
-        electron: "[Ar] 3d¹⁰ 4s¹"
-    },
-
-    Ag: {
-        fact: "Silver has the highest electrical conductivity of any element.",
-        electron: "[Kr] 4d¹⁰ 5s¹"
-    },
-
-    Au: {
-        fact: "Gold is a highly unreactive metal and has been valued for thousands of years.",
-        electron: "[Xe] 4f¹⁴ 5d¹⁰ 6s¹"
-    },
-
-    Hg: {
-        fact: "Mercury is a metal that is liquid at room temperature.",
-        electron: "[Xe] 4f¹⁴ 5d¹⁰ 6s²"
-    },
-
-    U: {
-        fact: "Uranium is a naturally occurring radioactive element.",
-        electron: "[Rn] 5f³ 6d¹ 7s²"
-    }
-};
+// Display all elements
 displayElements(elements);
 
 
 // SEARCH
 search.addEventListener("input", function () {
+
     const value = search.value.toLowerCase().trim();
 
     const filtered = elements.filter(element => {
+
+        const number = element[0].toString();
         const symbol = element[1].toLowerCase();
         const name = element[2].toLowerCase();
-        const number = element[0].toString();
 
         return (
             name.includes(value) ||
@@ -281,6 +239,7 @@ search.addEventListener("input", function () {
 
 // DARK MODE
 darkMode.addEventListener("click", function () {
+
     document.body.classList.toggle("dark");
 
     if (document.body.classList.contains("dark")) {
