@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Interactive Periodic Table</title>
 
 <style>
+
+/* =========================================
+   BASIC PAGE
+========================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -31,6 +39,11 @@ body.dark {
     padding: 35px 10px;
 }
 
+
+/* =========================================
+   HEADER
+========================================= */
+
 header {
     text-align: center;
 }
@@ -49,11 +62,17 @@ body.dark header p {
     color: #bbb;
 }
 
+
+/* =========================================
+   CONTROLS
+========================================= */
+
 .controls {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin: 30px 0;
+    flex-wrap: wrap;
 }
 
 #search {
@@ -79,25 +98,83 @@ body.dark #darkMode {
     color: #222;
 }
 
+
+/* =========================================
+   CATEGORY LEGEND
+========================================= */
+
+.categories {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 3px;
+    border: 1px solid #555;
+}
+
+
+/* =========================================
+   PERIODIC TABLE
+========================================= */
+
 #periodic-table {
     display: grid;
-    grid-template-columns: repeat(18, minmax(55px, 1fr));
+
+    grid-template-columns:
+        repeat(18, minmax(55px, 1fr));
+
     gap: 5px;
+
     width: 100%;
+
     overflow-x: auto;
+
     padding: 20px 0;
 }
 
+
+/* =========================================
+   ELEMENT BOX
+========================================= */
+
 .element {
     min-height: 75px;
+
     border: 2px solid #555;
+
     border-radius: 8px;
+
     padding: 5px;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
+
     cursor: pointer;
+
     transition: 0.2s;
 }
 
@@ -120,7 +197,10 @@ body.dark #darkMode {
     text-align: center;
 }
 
-/* Categories */
+
+/* =========================================
+   ELEMENT COLORS
+========================================= */
 
 .alkali {
     background: #ffaaaa;
@@ -162,17 +242,25 @@ body.dark #darkMode {
     background: #e5aef0;
 }
 
-body.dark .element {
-    border-color: #777;
-}
+
+/* =========================================
+   INFORMATION BOX
+========================================= */
 
 .info-box {
-    max-width: 700px;
+    max-width: 800px;
+
     margin: 30px auto;
+
     padding: 25px;
+
     border-radius: 15px;
+
     background: white;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.15);
+
     text-align: center;
 }
 
@@ -190,43 +278,193 @@ body.dark .info-box {
     border-top: 1px solid #aaa;
 }
 
-.categories {
-    text-align: center;
-    margin: 30px 0;
+
+/* =========================================
+   ELECTRON INFORMATION
+========================================= */
+
+.electron-info {
+    margin-top: 20px;
 }
 
-.legend {
+.shell-counts {
     display: flex;
-    flex-wrap: wrap;
+
     justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin: 20px 0;
 }
 
-.legend span {
+.shell-count {
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    background: #e8e8e8;
+
+    font-weight: bold;
+}
+
+body.dark .shell-count {
+    background: #333;
+}
+
+
+/* =========================================
+   ELECTRON SHELL DIAGRAM
+========================================= */
+
+.atom {
+    width: 360px;
+
+    height: 360px;
+
+    margin: 25px auto;
+
+    position: relative;
+}
+
+
+/* Nucleus */
+
+.nucleus {
+    width: 75px;
+
+    height: 75px;
+
+    border-radius: 50%;
+
+    background: #555;
+
+    color: white;
+
     display: flex;
+
+    justify-content: center;
+
     align-items: center;
-    gap: 5px;
-    font-size: 14px;
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    z-index: 10;
+
+    box-shadow:
+        0 0 15px rgba(0,0,0,0.3);
 }
 
-.dot {
-    width: 15px;
-    height: 15px;
-    display: inline-block;
-    border-radius: 3px;
-    border: 1px solid #555;
+
+/* Shell circles */
+
+.shell {
+    position: absolute;
+
+    border: 2px solid #888;
+
+    border-radius: 50%;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
 }
 
-/* Quiz */
+
+/* Individual shell sizes */
+
+.shell-1 {
+    width: 120px;
+    height: 120px;
+}
+
+.shell-2 {
+    width: 180px;
+    height: 180px;
+}
+
+.shell-3 {
+    width: 240px;
+    height: 240px;
+}
+
+.shell-4 {
+    width: 300px;
+    height: 300px;
+}
+
+.shell-5 {
+    width: 340px;
+    height: 340px;
+}
+
+.shell-6 {
+    width: 350px;
+    height: 350px;
+}
+
+.shell-7 {
+    width: 360px;
+    height: 360px;
+}
+
+
+/* Electrons */
+
+.electron {
+    position: absolute;
+
+    width: 13px;
+
+    height: 13px;
+
+    background: #333;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 20;
+
+    box-shadow:
+        0 0 5px rgba(0,0,0,0.4);
+}
+
+body.dark .electron {
+    background: #fff;
+}
+
+
+/* =========================================
+   QUIZ
+========================================= */
 
 .quiz {
     max-width: 700px;
+
     margin: 40px auto;
+
     padding: 25px;
+
     border-radius: 15px;
+
     background: white;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.15);
 }
 
 body.dark .quiz {
@@ -239,24 +477,35 @@ body.dark .quiz {
 
 #quiz-question {
     font-size: 20px;
+
     font-weight: bold;
+
     margin: 20px 0;
+
     text-align: center;
 }
 
 #quiz-options {
     display: flex;
+
     flex-wrap: wrap;
+
     justify-content: center;
+
     gap: 10px;
 }
 
 .quiz-option {
     padding: 12px 20px;
+
     border: none;
+
     border-radius: 8px;
+
     background: #ddd;
+
     cursor: pointer;
+
     font-size: 15px;
 }
 
@@ -264,24 +513,34 @@ body.dark .quiz {
     background: #bbb;
 }
 
-#nextQuestion,
-#restartQuiz {
+#nextQuestion {
     display: block;
+
     margin: 20px auto 0;
+
     padding: 12px 20px;
+
     border: none;
+
     border-radius: 8px;
+
     background: #333;
+
     color: white;
+
     cursor: pointer;
 }
 
 #score {
     text-align: center;
+
     font-weight: bold;
 }
 
-/* Mobile */
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 700px) {
 
@@ -291,6 +550,7 @@ body.dark .quiz {
 
     .controls {
         flex-direction: column;
+
         align-items: center;
     }
 
@@ -299,22 +559,53 @@ body.dark .quiz {
     }
 
     #periodic-table {
-        grid-template-columns: repeat(18, 60px);
+        grid-template-columns:
+            repeat(18, 60px);
+
         overflow-x: auto;
     }
 
+    .atom {
+        transform: scale(0.85);
+
+        margin-left: auto;
+
+        margin-right: auto;
+    }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
+
+<!-- =====================================
+     HEADER
+====================================== -->
+
 <header>
-    <h1>🧪 Interactive Periodic Table</h1>
-    <p>Explore all 118 chemical elements</p>
+
+    <h1>
+        🧪 Interactive Periodic Table
+    </h1>
+
+    <p>
+        Explore all 118 chemical elements
+    </p>
+
 </header>
+
+
+<!-- =====================================
+     SEARCH + DARK MODE
+====================================== -->
 
 <div class="controls">
 
@@ -330,32 +621,90 @@ body.dark .quiz {
 
 </div>
 
+
+<!-- =====================================
+     LEGEND
+====================================== -->
+
 <div class="categories">
 
-    <h2>Element Categories</h2>
+    <h2>
+        Element Categories
+    </h2>
 
     <div class="legend">
 
-        <span><i class="dot alkali"></i> Alkali Metals</span>
-        <span><i class="dot alkaline"></i> Alkaline Earth Metals</span>
-        <span><i class="dot transition"></i> Transition Metals</span>
-        <span><i class="dot post-transition"></i> Post-Transition Metals</span>
-        <span><i class="dot metalloid"></i> Metalloids</span>
-        <span><i class="dot nonmetal"></i> Nonmetals</span>
-        <span><i class="dot halogen"></i> Halogens</span>
-        <span><i class="dot noble"></i> Noble Gases</span>
-        <span><i class="dot lanthanide"></i> Lanthanides</span>
-        <span><i class="dot actinide"></i> Actinides</span>
+        <span>
+            <i class="dot alkali"></i>
+            Alkali Metals
+        </span>
+
+        <span>
+            <i class="dot alkaline"></i>
+            Alkaline Earth Metals
+        </span>
+
+        <span>
+            <i class="dot transition"></i>
+            Transition Metals
+        </span>
+
+        <span>
+            <i class="dot post-transition"></i>
+            Post-Transition Metals
+        </span>
+
+        <span>
+            <i class="dot metalloid"></i>
+            Metalloids
+        </span>
+
+        <span>
+            <i class="dot nonmetal"></i>
+            Nonmetals
+        </span>
+
+        <span>
+            <i class="dot halogen"></i>
+            Halogens
+        </span>
+
+        <span>
+            <i class="dot noble"></i>
+            Noble Gases
+        </span>
+
+        <span>
+            <i class="dot lanthanide"></i>
+            Lanthanides
+        </span>
+
+        <span>
+            <i class="dot actinide"></i>
+            Actinides
+        </span>
 
     </div>
 
 </div>
 
+
+<!-- =====================================
+     PERIODIC TABLE
+====================================== -->
+
 <div id="periodic-table"></div>
+
+
+<!-- =====================================
+     INFORMATION BOX
+====================================== -->
 
 <div class="info-box" id="info-box">
 
-    <h2>Select an Element</h2>
+    <h2>
+        Select an Element
+    </h2>
 
     <p>
         Click on any element to see its information.
@@ -364,11 +713,15 @@ body.dark .quiz {
 </div>
 
 
-<!-- QUIZ -->
+<!-- =====================================
+     QUIZ
+====================================== -->
 
 <div class="quiz">
 
-    <h2>🧠 Element Quiz</h2>
+    <h2>
+        🧠 Element Quiz
+    </h2>
 
     <p id="score">
         Score: 0
@@ -386,14 +739,16 @@ body.dark .quiz {
 
 </div>
 
+
 </div>
 
 
 <script>
 
-/* ==============================
+
+/* =========================================
    ELEMENT DATA
-================================ */
+========================================= */
 
 const elements = [
 
@@ -529,87 +884,219 @@ const elements = [
 ];
 
 
-/* ==============================
+/* =========================================
    FACTS
-================================ */
+========================================= */
 
 const facts = {
 
-H: ["Hydrogen is the lightest element and the most abundant element in the universe.", "1s¹"],
+H:["Hydrogen is the lightest element and the most abundant element in the universe.","1s¹"],
 
-He: ["Helium is a noble gas commonly used in balloons.", "1s²"],
+He:["Helium is a noble gas commonly used in balloons.","1s²"],
 
-Li: ["Lithium is a soft, silvery alkali metal.", "[He] 2s¹"],
+Li:["Lithium is a soft alkali metal used in rechargeable batteries.","[He] 2s¹"],
 
-C: ["Carbon is the basis of many compounds found in living organisms.", "1s² 2s² 2p²"],
+C:["Carbon is the basis of many compounds found in living organisms.","1s² 2s² 2p²"],
 
-N: ["Nitrogen makes up about 78% of Earth's atmosphere.", "1s² 2s² 2p³"],
+N:["Nitrogen makes up about 78% of Earth's atmosphere.","1s² 2s² 2p³"],
 
-O: ["Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.", "1s² 2s² 2p⁴"],
+O:["Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.","1s² 2s² 2p⁴"],
 
-F: ["Fluorine is the most electronegative element.", "1s² 2s² 2p⁵"],
+F:["Fluorine is the most electronegative element.","1s² 2s² 2p⁵"],
 
-Ne: ["Neon is a noble gas famous for its use in glowing signs.", "[He] 2s² 2p⁶"],
+Ne:["Neon is a noble gas famous for glowing signs.","[He] 2s² 2p⁶"],
 
-Na: ["Sodium is a highly reactive alkali metal.", "[Ne] 3s¹"],
+Na:["Sodium is a highly reactive alkali metal.","[Ne] 3s¹"],
 
-Mg: ["Magnesium is a lightweight metal used in alloys and fireworks.", "[Ne] 3s²"],
+Mg:["Magnesium is a lightweight metal used in alloys.","[Ne] 3s²"],
 
-Al: ["Aluminium is lightweight, corrosion-resistant and widely used in construction.", "[Ne] 3s² 3p¹"],
+Al:["Aluminium is lightweight and corrosion resistant.","[Ne] 3s² 3p¹"],
 
-Si: ["Silicon is extremely important in computer chips and electronics.", "[Ne] 3s² 3p²"],
+Si:["Silicon is extremely important in computer chips.","[Ne] 3s² 3p²"],
 
-Cl: ["Chlorine is a reactive halogen commonly used to disinfect water.", "[Ne] 3s² 3p⁵"],
+Cl:["Chlorine is commonly used to disinfect water.","[Ne] 3s² 3p⁵"],
 
-Ar: ["Argon is an inert noble gas used in lighting and welding.", "[Ne] 3s² 3p⁶"],
+Fe:["Iron is an important metal used in construction.","[Ar] 3d⁶ 4s²"],
 
-K: ["Potassium is an important element for living cells.", "[Ar] 4s¹"],
+Cu:["Copper is an excellent conductor of electricity.","[Ar] 3d¹⁰ 4s¹"],
 
-Ca: ["Calcium is important for bones and teeth.", "[Ar] 4s²"],
+Ag:["Silver has the highest electrical conductivity of any element.","[Kr] 4d¹⁰ 5s¹"],
 
-Fe: ["Iron is an important metal used in construction and manufacturing.", "[Ar] 3d⁶ 4s²"],
+Au:["Gold is highly unreactive and has been valued for thousands of years.","[Xe] 4f¹⁴ 5d¹⁰ 6s¹"],
 
-Co: ["Cobalt is used in batteries and some high-strength alloys.", "[Ar] 3d⁷ 4s²"],
+Hg:["Mercury is a metal that is liquid at room temperature.","[Xe] 4f¹⁴ 5d¹⁰ 6s²"],
 
-Ni: ["Nickel is widely used to make stainless steel and other alloys.", "[Ar] 3d⁸ 4s²"],
-
-Cu: ["Copper is an excellent conductor of electricity.", "[Ar] 3d¹⁰ 4s¹"],
-
-Zn: ["Zinc is commonly used to protect iron from corrosion.", "[Ar] 3d¹⁰ 4s²"],
-
-Br: ["Bromine is one of the few elements that is liquid at room temperature.", "[Ar] 3d¹⁰ 4s² 4p⁵"],
-
-Ag: ["Silver has the highest electrical conductivity of any element.", "[Kr] 4d¹⁰ 5s¹"],
-
-Sn: ["Tin is used in solder and to protect other metals from corrosion.", "[Kr] 4d¹⁰ 5s² 5p²"],
-
-I: ["Iodine is an essential element needed by the human body in small amounts.", "[Kr] 4d¹⁰ 5s² 5p⁵"],
-
-Xe: ["Xenon is a heavy noble gas used in specialized lamps.", "[Kr] 4d¹⁰ 5s² 5p⁶"],
-
-Au: ["Gold is a highly unreactive metal and has been valued for thousands of years.", "[Xe] 4f¹⁴ 5d¹⁰ 6s¹"],
-
-Hg: ["Mercury is a metal that is liquid at room temperature.", "[Xe] 4f¹⁴ 5d¹⁰ 6s²"],
-
-Pb: ["Lead is a dense metal that has been used for thousands of years.", "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²"],
-
-U: ["Uranium is a naturally occurring radioactive element.", "[Rn] 5f³ 6d¹ 7s²"],
+U:["Uranium is a naturally occurring radioactive element.","[Rn] 5f³ 6d¹ 7s²"]
 
 };
 
 
-/* ==============================
-   ELEMENT DISPLAY
-================================ */
+/* =========================================
+   PAGE ELEMENTS
+========================================= */
 
-const table = document.getElementById("periodic-table");
+const table =
+    document.getElementById("periodic-table");
 
-const infoBox = document.getElementById("info-box");
+const infoBox =
+    document.getElementById("info-box");
 
-const search = document.getElementById("search");
+const search =
+    document.getElementById("search");
 
-const darkMode = document.getElementById("darkMode");
+const darkMode =
+    document.getElementById("darkMode");
 
+
+/* =========================================
+   SHELL DISTRIBUTION
+========================================= */
+
+function getShellDistribution(atomicNumber) {
+
+    const capacities = [2,8,18,32,32,18,8];
+
+    const shells = [];
+
+    let remaining = atomicNumber;
+
+    for (let i = 0; i < capacities.length; i++) {
+
+        if (remaining <= 0) {
+            break;
+        }
+
+        const electrons =
+            Math.min(
+                remaining,
+                capacities[i]
+            );
+
+        shells.push(electrons);
+
+        remaining -= electrons;
+
+    }
+
+    return shells;
+}
+
+
+/* =========================================
+   CREATE ELECTRON DIAGRAM
+========================================= */
+
+function createElectronDiagram(
+    atomicNumber,
+    symbol
+) {
+
+    const shells =
+        getShellDistribution(
+            atomicNumber
+        );
+
+    const atom =
+        document.createElement("div");
+
+    atom.className = "atom";
+
+
+    /* Nucleus */
+
+    const nucleus =
+        document.createElement("div");
+
+    nucleus.className = "nucleus";
+
+    nucleus.textContent =
+        symbol;
+
+    atom.appendChild(nucleus);
+
+
+    shells.forEach(
+        (electronCount, shellIndex) => {
+
+            const shell =
+                document.createElement("div");
+
+            shell.className =
+                `shell shell-${shellIndex + 1}`;
+
+
+            /* Add electrons */
+
+            for (
+                let i = 0;
+                i < electronCount;
+                i++
+            ) {
+
+                const electron =
+                    document.createElement("span");
+
+                electron.className =
+                    "electron";
+
+
+                const angle =
+                    (360 / electronCount) * i;
+
+
+                const radius =
+                    50;
+
+
+                const x =
+                    50 +
+                    radius *
+                    Math.cos(
+                        angle *
+                        Math.PI /
+                        180
+                    );
+
+
+                const y =
+                    50 +
+                    radius *
+                    Math.sin(
+                        angle *
+                        Math.PI /
+                        180
+                    );
+
+
+                electron.style.left =
+                    `${x}%`;
+
+                electron.style.top =
+                    `${y}%`;
+
+
+                shell.appendChild(
+                    electron
+                );
+
+            }
+
+
+            atom.appendChild(
+                shell
+            );
+
+        }
+    );
+
+
+    return atom;
+}
+
+
+/* =========================================
+   DISPLAY ELEMENTS
+========================================= */
 
 function displayElements(list) {
 
@@ -627,88 +1114,51 @@ function displayElements(list) {
             group
         ] = element;
 
-        const box = document.createElement("div");
 
-        box.className = "element " + category;
+        const box =
+            document.createElement("div");
 
-        box.style.gridRow = period;
 
-        box.style.gridColumn = group;
+        box.className =
+            "element " + category;
+
+
+        box.style.gridRow =
+            period;
+
+
+        box.style.gridColumn =
+            group;
+
 
         box.innerHTML = `
-            <span class="number">${number}</span>
-            <span class="symbol">${symbol}</span>
-            <span class="name">${name}</span>
+
+            <span class="number">
+                ${number}
+            </span>
+
+            <span class="symbol">
+                ${symbol}
+            </span>
+
+            <span class="name">
+                ${name}
+            </span>
+
         `;
 
-        box.addEventListener("click", () => {
 
-            const factData = facts[symbol];
+        box.addEventListener(
+            "click",
+            () => {
 
-            let factText =
-                "Interesting information about this element will be added soon.";
-
-            let configuration =
-                "Information not added yet.";
-
-            if (factData) {
-
-                factText = factData[0];
-
-                configuration = factData[1];
+                showElement(
+                    element
+                );
 
             }
+        );
 
-            infoBox.innerHTML = `
-
-                <h2>${name} (${symbol})</h2>
-
-                <p>
-                    <strong>Atomic Number:</strong>
-                    ${number}
-                </p>
-
-                <p>
-                    <strong>Atomic Mass:</strong>
-                    ${mass}
-                </p>
-
-                <p>
-                    <strong>Category:</strong>
-                    ${category}
-                </p>
-
-                <p>
-                    <strong>Period:</strong>
-                    ${period}
-                </p>
-
-                <p>
-                    <strong>Group:</strong>
-                    ${group}
-                </p>
-
-                <p>
-                    <strong>Electron Configuration:</strong>
-                    ${configuration}
-                </p>
-
-                <hr>
-
-                <h3>💡 Did You Know?</h3>
-
-                <p>
-                    ${factText}
-                </p>
-
-            `;
-
-            infoBox.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-        });
 
         table.appendChild(box);
 
@@ -717,112 +1167,336 @@ function displayElements(list) {
 }
 
 
-/* ==============================
-   INITIAL DISPLAY
-================================ */
+/* =========================================
+   SHOW ELEMENT INFORMATION
+========================================= */
 
-displayElements(elements);
+function showElement(element) {
+
+    const [
+        number,
+        symbol,
+        name,
+        mass,
+        category,
+        period,
+        group
+    ] = element;
 
 
-/* ==============================
-   SEARCH
-================================ */
+    const factData =
+        facts[symbol];
 
-search.addEventListener("input", () => {
 
-    const value = search.value
-        .toLowerCase()
-        .trim();
+    let fact =
+        "Interesting information about this element will be added soon.";
 
-    if (value === "") {
 
-        displayElements(elements);
+    let configuration =
+        "Not available yet.";
 
-        return;
+
+    if (factData) {
+
+        fact =
+            factData[0];
+
+        configuration =
+            factData[1];
 
     }
 
-    const filtered = elements.filter(element => {
 
-        const number =
-            String(element[0]);
-
-        const symbol =
-            element[1].toLowerCase();
-
-        const name =
-            element[2].toLowerCase();
-
-        return (
-            name.includes(value) ||
-            symbol.includes(value) ||
-            number === value
+    const shells =
+        getShellDistribution(
+            number
         );
 
+
+    infoBox.innerHTML = `
+
+        <h2>
+            ${name} (${symbol})
+        </h2>
+
+        <p>
+            <strong>
+                Atomic Number:
+            </strong>
+            ${number}
+        </p>
+
+        <p>
+            <strong>
+                Atomic Mass:
+            </strong>
+            ${mass}
+        </p>
+
+        <p>
+            <strong>
+                Category:
+            </strong>
+            ${category}
+        </p>
+
+        <p>
+            <strong>
+                Period:
+            </strong>
+            ${period}
+        </p>
+
+        <p>
+            <strong>
+                Group:
+            </strong>
+            ${group}
+        </p>
+
+        <hr>
+
+        <div class="electron-info">
+
+            <h3>
+                ⚛️ Electron Configuration
+            </h3>
+
+            <p>
+                <strong>
+                    Orbital configuration:
+                </strong>
+                ${configuration}
+            </p>
+
+            <div class="shell-counts">
+
+                ${shells.map(
+                    (count, index) => `
+                        <div class="shell-count">
+                            ${String.fromCharCode(75 + index)}:
+                            ${count}
+                        </div>
+                    `
+                ).join("")}
+
+            </div>
+
+            <h3>
+                🔬 Electron Shell Diagram
+            </h3>
+
+        </div>
+
+    `;
+
+
+    const diagram =
+        createElectronDiagram(
+            number,
+            symbol
+        );
+
+
+    infoBox.appendChild(
+        diagram
+    );
+
+
+    infoBox.innerHTML += `
+
+        <hr>
+
+        <h3>
+            💡 Did You Know?
+        </h3>
+
+        <p>
+            ${fact}
+        </p>
+
+    `;
+
+
+    infoBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
     });
 
-    displayElements(filtered);
-
-});
+}
 
 
-/* ==============================
-   DARK MODE
-================================ */
+/* =========================================
+   INITIAL TABLE
+========================================= */
 
-darkMode.addEventListener("click", () => {
+displayElements(
+    elements
+);
 
-    document.body.classList.toggle("dark");
 
-    if (document.body.classList.contains("dark")) {
+/* =========================================
+   SEARCH
+========================================= */
 
-        darkMode.textContent = "☀️ Light Mode";
+search.addEventListener(
+    "input",
+    () => {
 
-    } else {
+        const value =
+            search.value
+                .toLowerCase()
+                .trim();
 
-        darkMode.textContent = "🌙 Dark Mode";
+
+        if (value === "") {
+
+            displayElements(
+                elements
+            );
+
+            return;
+
+        }
+
+
+        const filtered =
+            elements.filter(
+                element => {
+
+                    const number =
+                        String(
+                            element[0]
+                        );
+
+
+                    const symbol =
+                        element[1]
+                            .toLowerCase();
+
+
+                    const name =
+                        element[2]
+                            .toLowerCase();
+
+
+                    return (
+
+                        name.includes(
+                            value
+                        )
+
+                        ||
+
+                        symbol.includes(
+                            value
+                        )
+
+                        ||
+
+                        number === value
+
+                    );
+
+                }
+            );
+
+
+        displayElements(
+            filtered
+        );
 
     }
+);
 
-});
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+darkMode.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "dark"
+        );
 
 
-/* ==============================
+        if (
+            document.body.classList.contains(
+                "dark"
+            )
+        ) {
+
+            darkMode.textContent =
+                "☀️ Light Mode";
+
+        }
+
+        else {
+
+            darkMode.textContent =
+                "🌙 Dark Mode";
+
+        }
+
+    }
+);
+
+
+/* =========================================
    QUIZ
-================================ */
+========================================= */
 
 let score = 0;
 
 let currentQuestion = null;
 
+
 const quizQuestion =
-    document.getElementById("quiz-question");
+    document.getElementById(
+        "quiz-question"
+    );
+
 
 const quizOptions =
-    document.getElementById("quiz-options");
+    document.getElementById(
+        "quiz-options"
+    );
+
 
 const scoreDisplay =
-    document.getElementById("score");
+    document.getElementById(
+        "score"
+    );
+
 
 const nextQuestion =
-    document.getElementById("nextQuestion");
+    document.getElementById(
+        "nextQuestion"
+    );
 
 
 function newQuestion() {
 
     quizOptions.innerHTML = "";
 
+
     const randomIndex =
-        Math.floor(Math.random() * elements.length);
+        Math.floor(
+            Math.random() *
+            elements.length
+        );
+
 
     currentQuestion =
         elements[randomIndex];
 
-    const number =
-        currentQuestion[0];
 
     const symbol =
         currentQuestion[1];
+
 
     const name =
         currentQuestion[2];
@@ -832,76 +1506,116 @@ function newQuestion() {
         `Which element has the symbol <strong>${symbol}</strong>?`;
 
 
-    let options = [name];
+    const options = [name];
 
 
-    while (options.length < 4) {
+    while (
+        options.length < 4
+    ) {
 
-        const randomElement =
+        const random =
             elements[
                 Math.floor(
-                    Math.random() * elements.length
+                    Math.random() *
+                    elements.length
                 )
             ];
 
+
         const randomName =
-            randomElement[2];
+            random[2];
 
-        if (!options.includes(randomName)) {
 
-            options.push(randomName);
+        if (
+            !options.includes(
+                randomName
+            )
+        ) {
+
+            options.push(
+                randomName
+            );
 
         }
 
     }
 
 
-    options.sort(() => Math.random() - 0.5);
+    options.sort(
+        () =>
+            Math.random() - 0.5
+    );
 
 
-    options.forEach(option => {
+    options.forEach(
+        option => {
 
-        const button =
-            document.createElement("button");
+            const button =
+                document.createElement(
+                    "button"
+                );
 
-        button.className =
-            "quiz-option";
 
-        button.textContent =
-            option;
+            button.className =
+                "quiz-option";
 
-        button.addEventListener("click", () => {
 
-            if (option === name) {
+            button.textContent =
+                option;
 
-                score++;
 
-                scoreDisplay.textContent =
-                    "Score: " + score;
+            button.addEventListener(
+                "click",
+                () => {
 
-                button.textContent =
-                    "✅ Correct!";
+                    if (
+                        option === name
+                    ) {
 
-            } else {
+                        score++;
 
-                button.textContent =
-                    "❌ Incorrect";
 
-            }
+                        scoreDisplay.textContent =
+                            "Score: " +
+                            score;
 
-            quizOptions
-                .querySelectorAll("button")
-                .forEach(btn => {
 
-                    btn.disabled = true;
+                        button.textContent =
+                            "✅ Correct!";
 
-                });
+                    }
 
-        });
+                    else {
 
-        quizOptions.appendChild(button);
+                        button.textContent =
+                            "❌ Incorrect";
 
-    });
+                    }
+
+
+                    quizOptions
+                        .querySelectorAll(
+                            "button"
+                        )
+                        .forEach(
+                            btn => {
+
+                                btn.disabled =
+                                    true;
+
+                            }
+                        );
+
+                }
+            );
+
+
+            quizOptions.appendChild(
+                button
+            );
+
+        }
+    );
 
 }
 
@@ -910,6 +1624,7 @@ nextQuestion.addEventListener(
     "click",
     newQuestion
 );
+
 
 </script>
 
