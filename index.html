@@ -1,173 +1,917 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<title>Interactive Periodic Table</title>
 
-    <title>Interactive Periodic Table</title>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    <link rel="stylesheet" href="style.css">
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6fb;
+    color: #222;
+    transition: 0.3s;
+}
+
+body.dark {
+    background: #111;
+    color: white;
+}
+
+.container {
+    width: 95%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 35px 10px;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 42px;
+    margin: 10px 0;
+}
+
+header p {
+    color: #666;
+    font-size: 18px;
+}
+
+body.dark header p {
+    color: #bbb;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+#search {
+    width: 350px;
+    padding: 14px;
+    border: 2px solid #bbb;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+#darkMode {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+body.dark #darkMode {
+    background: white;
+    color: #222;
+}
+
+#periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, minmax(55px, 1fr));
+    gap: 5px;
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px 0;
+}
+
+.element {
+    min-height: 75px;
+    border: 2px solid #555;
+    border-radius: 8px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.element:hover {
+    transform: scale(1.08);
+    z-index: 2;
+}
+
+.number {
+    font-size: 11px;
+}
+
+.symbol {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.name {
+    font-size: 9px;
+    text-align: center;
+}
+
+/* Categories */
+
+.alkali {
+    background: #ffaaaa;
+}
+
+.alkaline {
+    background: #ffd28a;
+}
+
+.transition {
+    background: #fff0a8;
+}
+
+.post-transition {
+    background: #bce0b8;
+}
+
+.metalloid {
+    background: #a9dff5;
+}
+
+.nonmetal {
+    background: #c9b9e8;
+}
+
+.halogen {
+    background: #f3aac4;
+}
+
+.noble {
+    background: #a9d8d4;
+}
+
+.lanthanide {
+    background: #c9c1bc;
+}
+
+.actinide {
+    background: #e5aef0;
+}
+
+body.dark .element {
+    border-color: #777;
+}
+
+.info-box {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+body.dark .info-box {
+    background: #222;
+    color: white;
+}
+
+.info-box h2 {
+    margin-top: 0;
+}
+
+.info-box hr {
+    border: none;
+    border-top: 1px solid #aaa;
+}
+
+.categories {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 3px;
+    border: 1px solid #555;
+}
+
+/* Quiz */
+
+.quiz {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+body.dark .quiz {
+    background: #222;
+}
+
+.quiz h2 {
+    text-align: center;
+}
+
+#quiz-question {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
+}
+
+#quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.quiz-option {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ddd;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.quiz-option:hover {
+    background: #bbb;
+}
+
+#nextQuestion,
+#restartQuiz {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+}
+
+#score {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #search {
+        width: 90%;
+    }
+
+    #periodic-table {
+        grid-template-columns: repeat(18, 60px);
+        overflow-x: auto;
+    }
+
+}
+</style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
+<div class="container">
 
-    <header>
+<header>
+    <h1>🧪 Interactive Periodic Table</h1>
+    <p>Explore all 118 chemical elements</p>
+</header>
 
-        <h1>🧪 Interactive Periodic Table</h1>
+<div class="controls">
 
-        <p>
-            Explore all 118 chemical elements
-        </p>
+    <input
+        type="text"
+        id="search"
+        placeholder="🔎 Search element..."
+    >
 
-    </header>
+    <button id="darkMode">
+        🌙 Dark Mode
+    </button>
 
+</div>
 
-    <!-- CONTROLS -->
+<div class="categories">
 
-    <div class="controls">
+    <h2>Element Categories</h2>
 
-        <input
-            type="text"
-            id="search"
-            placeholder="🔎 Search element..."
-        >
+    <div class="legend">
 
-        <button id="darkMode">
-            🌙 Dark Mode
-        </button>
-
-        <button id="quizMode">
-            🧠 Quiz Mode
-        </button>
+        <span><i class="dot alkali"></i> Alkali Metals</span>
+        <span><i class="dot alkaline"></i> Alkaline Earth Metals</span>
+        <span><i class="dot transition"></i> Transition Metals</span>
+        <span><i class="dot post-transition"></i> Post-Transition Metals</span>
+        <span><i class="dot metalloid"></i> Metalloids</span>
+        <span><i class="dot nonmetal"></i> Nonmetals</span>
+        <span><i class="dot halogen"></i> Halogens</span>
+        <span><i class="dot noble"></i> Noble Gases</span>
+        <span><i class="dot lanthanide"></i> Lanthanides</span>
+        <span><i class="dot actinide"></i> Actinides</span>
 
     </div>
 
+</div>
 
-    <!-- CATEGORY LEGEND -->
+<div id="periodic-table"></div>
 
-    <section class="legend">
+<div class="info-box" id="info-box">
 
-        <h2>Element Categories</h2>
+    <h2>Select an Element</h2>
 
-        <div class="legend-items">
+    <p>
+        Click on any element to see its information.
+    </p>
 
-            <span>
-                <span class="legend-color alkali"></span>
-                Alkali Metals
-            </span>
-
-            <span>
-                <span class="legend-color alkaline"></span>
-                Alkaline Earth Metals
-            </span>
-
-            <span>
-                <span class="legend-color transition"></span>
-                Transition Metals
-            </span>
-
-            <span>
-                <span class="legend-color post-transition"></span>
-                Post-Transition Metals
-            </span>
-
-            <span>
-                <span class="legend-color metalloid"></span>
-                Metalloids
-            </span>
-
-            <span>
-                <span class="legend-color nonmetal"></span>
-                Nonmetals
-            </span>
-
-            <span>
-                <span class="legend-color halogen"></span>
-                Halogens
-            </span>
-
-            <span>
-                <span class="legend-color noble"></span>
-                Noble Gases
-            </span>
-
-            <span>
-                <span class="legend-color lanthanide"></span>
-                Lanthanides
-            </span>
-
-            <span>
-                <span class="legend-color actinide"></span>
-                Actinides
-            </span>
-
-        </div>
-
-    </section>
+</div>
 
 
-    <!-- PERIODIC TABLE -->
+<!-- QUIZ -->
 
-    <main>
+<div class="quiz">
 
-        <div id="periodic-table"></div>
+    <h2>🧠 Element Quiz</h2>
 
-    </main>
+    <p id="score">
+        Score: 0
+    </p>
 
+    <div id="quiz-question">
+        Click "Next Question" to begin!
+    </div>
 
-    <!-- ELEMENT INFORMATION -->
+    <div id="quiz-options"></div>
 
-    <section id="info-box">
+    <button id="nextQuestion">
+        Next Question →
+    </button>
 
-        <h2>Select an Element</h2>
+</div>
 
-        <p>
-            Click on any element to see its information.
-        </p>
-
-    </section>
-
-
-    <!-- QUIZ -->
-
-    <section id="quiz-box" class="hidden">
-
-        <h2>🧠 Element Quiz</h2>
-
-        <p id="score">
-            Score: 0
-        </p>
-
-        <h3 id="question">
-            Question will appear here
-        </h3>
-
-        <div id="answers"></div>
-
-        <p id="quiz-result"></p>
-
-        <button id="next-question">
-            Next Question →
-        </button>
-
-        <button id="exit-quiz">
-            Exit Quiz
-        </button>
-
-    </section>
+</div>
 
 
-    <!-- JAVASCRIPT -->
+<script>
 
-    <script src="script.js"></script>
+/* ==============================
+   ELEMENT DATA
+================================ */
+
+const elements = [
+
+[1,"H","Hydrogen",1.008,"nonmetal",1,1],
+[2,"He","Helium",4.003,"noble",1,18],
+
+[3,"Li","Lithium",6.94,"alkali",2,1],
+[4,"Be","Beryllium",9.012,"alkaline",2,2],
+[5,"B","Boron",10.81,"metalloid",2,13],
+[6,"C","Carbon",12.011,"nonmetal",2,14],
+[7,"N","Nitrogen",14.007,"nonmetal",2,15],
+[8,"O","Oxygen",15.999,"nonmetal",2,16],
+[9,"F","Fluorine",18.998,"halogen",2,17],
+[10,"Ne","Neon",20.180,"noble",2,18],
+
+[11,"Na","Sodium",22.990,"alkali",3,1],
+[12,"Mg","Magnesium",24.305,"alkaline",3,2],
+[13,"Al","Aluminium",26.982,"post-transition",3,13],
+[14,"Si","Silicon",28.085,"metalloid",3,14],
+[15,"P","Phosphorus",30.974,"nonmetal",3,15],
+[16,"S","Sulfur",32.06,"nonmetal",3,16],
+[17,"Cl","Chlorine",35.45,"halogen",3,17],
+[18,"Ar","Argon",39.948,"noble",3,18],
+
+[19,"K","Potassium",39.098,"alkali",4,1],
+[20,"Ca","Calcium",40.078,"alkaline",4,2],
+[21,"Sc","Scandium",44.956,"transition",4,3],
+[22,"Ti","Titanium",47.867,"transition",4,4],
+[23,"V","Vanadium",50.942,"transition",4,5],
+[24,"Cr","Chromium",51.996,"transition",4,6],
+[25,"Mn","Manganese",54.938,"transition",4,7],
+[26,"Fe","Iron",55.845,"transition",4,8],
+[27,"Co","Cobalt",58.933,"transition",4,9],
+[28,"Ni","Nickel",58.693,"transition",4,10],
+[29,"Cu","Copper",63.546,"transition",4,11],
+[30,"Zn","Zinc",65.38,"transition",4,12],
+[31,"Ga","Gallium",69.723,"post-transition",4,13],
+[32,"Ge","Germanium",72.63,"metalloid",4,14],
+[33,"As","Arsenic",74.922,"metalloid",4,15],
+[34,"Se","Selenium",78.971,"nonmetal",4,16],
+[35,"Br","Bromine",79.904,"halogen",4,17],
+[36,"Kr","Krypton",83.798,"noble",4,18],
+
+[37,"Rb","Rubidium",85.468,"alkali",5,1],
+[38,"Sr","Strontium",87.62,"alkaline",5,2],
+[39,"Y","Yttrium",88.906,"transition",5,3],
+[40,"Zr","Zirconium",91.224,"transition",5,4],
+[41,"Nb","Niobium",92.906,"transition",5,5],
+[42,"Mo","Molybdenum",95.95,"transition",5,6],
+[43,"Tc","Technetium",98,"transition",5,7],
+[44,"Ru","Ruthenium",101.07,"transition",5,8],
+[45,"Rh","Rhodium",102.91,"transition",5,9],
+[46,"Pd","Palladium",106.42,"transition",5,10],
+[47,"Ag","Silver",107.87,"transition",5,11],
+[48,"Cd","Cadmium",112.41,"transition",5,12],
+[49,"In","Indium",114.82,"post-transition",5,13],
+[50,"Sn","Tin",118.71,"post-transition",5,14],
+[51,"Sb","Antimony",121.76,"metalloid",5,15],
+[52,"Te","Tellurium",127.60,"metalloid",5,16],
+[53,"I","Iodine",126.90,"halogen",5,17],
+[54,"Xe","Xenon",131.29,"noble",5,18],
+
+[55,"Cs","Caesium",132.91,"alkali",6,1],
+[56,"Ba","Barium",137.33,"alkaline",6,2],
+[57,"La","Lanthanum",138.91,"lanthanide",6,3],
+
+[72,"Hf","Hafnium",178.49,"transition",6,4],
+[73,"Ta","Tantalum",180.95,"transition",6,5],
+[74,"W","Tungsten",183.84,"transition",6,6],
+[75,"Re","Rhenium",186.21,"transition",6,7],
+[76,"Os","Osmium",190.23,"transition",6,8],
+[77,"Ir","Iridium",192.22,"transition",6,9],
+[78,"Pt","Platinum",195.08,"transition",6,10],
+[79,"Au","Gold",196.97,"transition",6,11],
+[80,"Hg","Mercury",200.59,"transition",6,12],
+[81,"Tl","Thallium",204.38,"post-transition",6,13],
+[82,"Pb","Lead",207.2,"post-transition",6,14],
+[83,"Bi","Bismuth",208.98,"post-transition",6,15],
+[84,"Po","Polonium",209,"post-transition",6,16],
+[85,"At","Astatine",210,"halogen",6,17],
+[86,"Rn","Radon",222,"noble",6,18],
+
+[87,"Fr","Francium",223,"alkali",7,1],
+[88,"Ra","Radium",226,"alkaline",7,2],
+[89,"Ac","Actinium",227,"actinide",7,3],
+
+[104,"Rf","Rutherfordium",267,"transition",7,4],
+[105,"Db","Dubnium",268,"transition",7,5],
+[106,"Sg","Seaborgium",269,"transition",7,6],
+[107,"Bh","Bohrium",270,"transition",7,7],
+[108,"Hs","Hassium",277,"transition",7,8],
+[109,"Mt","Meitnerium",278,"transition",7,9],
+[110,"Ds","Darmstadtium",281,"transition",7,10],
+[111,"Rg","Roentgenium",282,"transition",7,11],
+[112,"Cn","Copernicium",285,"transition",7,12],
+[113,"Nh","Nihonium",286,"post-transition",7,13],
+[114,"Fl","Flerovium",289,"post-transition",7,14],
+[115,"Mc","Moscovium",290,"post-transition",7,15],
+[116,"Lv","Livermorium",293,"post-transition",7,16],
+[117,"Ts","Tennessine",294,"halogen",7,17],
+[118,"Og","Oganesson",294,"noble",7,18],
+
+[58,"Ce","Cerium",140.12,"lanthanide",8,4],
+[59,"Pr","Praseodymium",140.91,"lanthanide",8,5],
+[60,"Nd","Neodymium",144.24,"lanthanide",8,6],
+[61,"Pm","Promethium",145,"lanthanide",8,7],
+[62,"Sm","Samarium",150.36,"lanthanide",8,8],
+[63,"Eu","Europium",151.96,"lanthanide",8,9],
+[64,"Gd","Gadolinium",157.25,"lanthanide",8,10],
+[65,"Tb","Terbium",158.93,"lanthanide",8,11],
+[66,"Dy","Dysprosium",162.50,"lanthanide",8,12],
+[67,"Ho","Holmium",164.93,"lanthanide",8,13],
+[68,"Er","Erbium",167.26,"lanthanide",8,14],
+[69,"Tm","Thulium",168.93,"lanthanide",8,15],
+[70,"Yb","Ytterbium",173.05,"lanthanide",8,16],
+[71,"Lu","Lutetium",174.97,"lanthanide",8,17],
+
+[90,"Th","Thorium",232.04,"actinide",9,4],
+[91,"Pa","Protactinium",231.04,"actinide",9,5],
+[92,"U","Uranium",238.03,"actinide",9,6],
+[93,"Np","Neptunium",237,"actinide",9,7],
+[94,"Pu","Plutonium",244,"actinide",9,8],
+[95,"Am","Americium",243,"actinide",9,9],
+[96,"Cm","Curium",247,"actinide",9,10],
+[97,"Bk","Berkelium",247,"actinide",9,11],
+[98,"Cf","Californium",251,"actinide",9,12],
+[99,"Es","Einsteinium",252,"actinide",9,13],
+[100,"Fm","Fermium",257,"actinide",9,14],
+[101,"Md","Mendelevium",258,"actinide",9,15],
+[102,"No","Nobelium",259,"actinide",9,16],
+[103,"Lr","Lawrencium",266,"actinide",9,17]
+
+];
+
+
+/* ==============================
+   FACTS
+================================ */
+
+const facts = {
+
+H: ["Hydrogen is the lightest element and the most abundant element in the universe.", "1s¹"],
+
+He: ["Helium is a noble gas commonly used in balloons.", "1s²"],
+
+Li: ["Lithium is a soft, silvery alkali metal.", "[He] 2s¹"],
+
+C: ["Carbon is the basis of many compounds found in living organisms.", "1s² 2s² 2p²"],
+
+N: ["Nitrogen makes up about 78% of Earth's atmosphere.", "1s² 2s² 2p³"],
+
+O: ["Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.", "1s² 2s² 2p⁴"],
+
+F: ["Fluorine is the most electronegative element.", "1s² 2s² 2p⁵"],
+
+Ne: ["Neon is a noble gas famous for its use in glowing signs.", "[He] 2s² 2p⁶"],
+
+Na: ["Sodium is a highly reactive alkali metal.", "[Ne] 3s¹"],
+
+Mg: ["Magnesium is a lightweight metal used in alloys and fireworks.", "[Ne] 3s²"],
+
+Al: ["Aluminium is lightweight, corrosion-resistant and widely used in construction.", "[Ne] 3s² 3p¹"],
+
+Si: ["Silicon is extremely important in computer chips and electronics.", "[Ne] 3s² 3p²"],
+
+Cl: ["Chlorine is a reactive halogen commonly used to disinfect water.", "[Ne] 3s² 3p⁵"],
+
+Ar: ["Argon is an inert noble gas used in lighting and welding.", "[Ne] 3s² 3p⁶"],
+
+K: ["Potassium is an important element for living cells.", "[Ar] 4s¹"],
+
+Ca: ["Calcium is important for bones and teeth.", "[Ar] 4s²"],
+
+Fe: ["Iron is an important metal used in construction and manufacturing.", "[Ar] 3d⁶ 4s²"],
+
+Co: ["Cobalt is used in batteries and some high-strength alloys.", "[Ar] 3d⁷ 4s²"],
+
+Ni: ["Nickel is widely used to make stainless steel and other alloys.", "[Ar] 3d⁸ 4s²"],
+
+Cu: ["Copper is an excellent conductor of electricity.", "[Ar] 3d¹⁰ 4s¹"],
+
+Zn: ["Zinc is commonly used to protect iron from corrosion.", "[Ar] 3d¹⁰ 4s²"],
+
+Br: ["Bromine is one of the few elements that is liquid at room temperature.", "[Ar] 3d¹⁰ 4s² 4p⁵"],
+
+Ag: ["Silver has the highest electrical conductivity of any element.", "[Kr] 4d¹⁰ 5s¹"],
+
+Sn: ["Tin is used in solder and to protect other metals from corrosion.", "[Kr] 4d¹⁰ 5s² 5p²"],
+
+I: ["Iodine is an essential element needed by the human body in small amounts.", "[Kr] 4d¹⁰ 5s² 5p⁵"],
+
+Xe: ["Xenon is a heavy noble gas used in specialized lamps.", "[Kr] 4d¹⁰ 5s² 5p⁶"],
+
+Au: ["Gold is a highly unreactive metal and has been valued for thousands of years.", "[Xe] 4f¹⁴ 5d¹⁰ 6s¹"],
+
+Hg: ["Mercury is a metal that is liquid at room temperature.", "[Xe] 4f¹⁴ 5d¹⁰ 6s²"],
+
+Pb: ["Lead is a dense metal that has been used for thousands of years.", "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²"],
+
+U: ["Uranium is a naturally occurring radioactive element.", "[Rn] 5f³ 6d¹ 7s²"],
+
+};
+
+
+/* ==============================
+   ELEMENT DISPLAY
+================================ */
+
+const table = document.getElementById("periodic-table");
+
+const infoBox = document.getElementById("info-box");
+
+const search = document.getElementById("search");
+
+const darkMode = document.getElementById("darkMode");
+
+
+function displayElements(list) {
+
+    table.innerHTML = "";
+
+    list.forEach(element => {
+
+        const [
+            number,
+            symbol,
+            name,
+            mass,
+            category,
+            period,
+            group
+        ] = element;
+
+        const box = document.createElement("div");
+
+        box.className = "element " + category;
+
+        box.style.gridRow = period;
+
+        box.style.gridColumn = group;
+
+        box.innerHTML = `
+            <span class="number">${number}</span>
+            <span class="symbol">${symbol}</span>
+            <span class="name">${name}</span>
+        `;
+
+        box.addEventListener("click", () => {
+
+            const factData = facts[symbol];
+
+            let factText =
+                "Interesting information about this element will be added soon.";
+
+            let configuration =
+                "Information not added yet.";
+
+            if (factData) {
+
+                factText = factData[0];
+
+                configuration = factData[1];
+
+            }
+
+            infoBox.innerHTML = `
+
+                <h2>${name} (${symbol})</h2>
+
+                <p>
+                    <strong>Atomic Number:</strong>
+                    ${number}
+                </p>
+
+                <p>
+                    <strong>Atomic Mass:</strong>
+                    ${mass}
+                </p>
+
+                <p>
+                    <strong>Category:</strong>
+                    ${category}
+                </p>
+
+                <p>
+                    <strong>Period:</strong>
+                    ${period}
+                </p>
+
+                <p>
+                    <strong>Group:</strong>
+                    ${group}
+                </p>
+
+                <p>
+                    <strong>Electron Configuration:</strong>
+                    ${configuration}
+                </p>
+
+                <hr>
+
+                <h3>💡 Did You Know?</h3>
+
+                <p>
+                    ${factText}
+                </p>
+
+            `;
+
+            infoBox.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        });
+
+        table.appendChild(box);
+
+    });
+
+}
+
+
+/* ==============================
+   INITIAL DISPLAY
+================================ */
+
+displayElements(elements);
+
+
+/* ==============================
+   SEARCH
+================================ */
+
+search.addEventListener("input", () => {
+
+    const value = search.value
+        .toLowerCase()
+        .trim();
+
+    if (value === "") {
+
+        displayElements(elements);
+
+        return;
+
+    }
+
+    const filtered = elements.filter(element => {
+
+        const number =
+            String(element[0]);
+
+        const symbol =
+            element[1].toLowerCase();
+
+        const name =
+            element[2].toLowerCase();
+
+        return (
+            name.includes(value) ||
+            symbol.includes(value) ||
+            number === value
+        );
+
+    });
+
+    displayElements(filtered);
+
+});
+
+
+/* ==============================
+   DARK MODE
+================================ */
+
+darkMode.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+        darkMode.textContent = "☀️ Light Mode";
+
+    } else {
+
+        darkMode.textContent = "🌙 Dark Mode";
+
+    }
+
+});
+
+
+/* ==============================
+   QUIZ
+================================ */
+
+let score = 0;
+
+let currentQuestion = null;
+
+const quizQuestion =
+    document.getElementById("quiz-question");
+
+const quizOptions =
+    document.getElementById("quiz-options");
+
+const scoreDisplay =
+    document.getElementById("score");
+
+const nextQuestion =
+    document.getElementById("nextQuestion");
+
+
+function newQuestion() {
+
+    quizOptions.innerHTML = "";
+
+    const randomIndex =
+        Math.floor(Math.random() * elements.length);
+
+    currentQuestion =
+        elements[randomIndex];
+
+    const number =
+        currentQuestion[0];
+
+    const symbol =
+        currentQuestion[1];
+
+    const name =
+        currentQuestion[2];
+
+
+    quizQuestion.innerHTML =
+        `Which element has the symbol <strong>${symbol}</strong>?`;
+
+
+    let options = [name];
+
+
+    while (options.length < 4) {
+
+        const randomElement =
+            elements[
+                Math.floor(
+                    Math.random() * elements.length
+                )
+            ];
+
+        const randomName =
+            randomElement[2];
+
+        if (!options.includes(randomName)) {
+
+            options.push(randomName);
+
+        }
+
+    }
+
+
+    options.sort(() => Math.random() - 0.5);
+
+
+    options.forEach(option => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "quiz-option";
+
+        button.textContent =
+            option;
+
+        button.addEventListener("click", () => {
+
+            if (option === name) {
+
+                score++;
+
+                scoreDisplay.textContent =
+                    "Score: " + score;
+
+                button.textContent =
+                    "✅ Correct!";
+
+            } else {
+
+                button.textContent =
+                    "❌ Incorrect";
+
+            }
+
+            quizOptions
+                .querySelectorAll("button")
+                .forEach(btn => {
+
+                    btn.disabled = true;
+
+                });
+
+        });
+
+        quizOptions.appendChild(button);
+
+    });
+
+}
+
+
+nextQuestion.addEventListener(
+    "click",
+    newQuestion
+);
+
+</script>
 
 </body>
-
 </html>
