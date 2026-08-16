@@ -11,39 +11,96 @@
 
 <body>
 
-    <header>
-        <h1>🧪 Interactive Periodic Table</h1>
-        <p>Explore all 118 chemical elements</p>
+<header>
+
+    <h1>🧪 Interactive Periodic Table</h1>
+
+    <p>Explore all 118 chemical elements</p>
+
+    <div class="controls">
 
         <input
             type="text"
             id="search"
-            placeholder="🔎 Search an element..."
+            placeholder="🔎 Search element, symbol or atomic number..."
         >
 
-        <button id="darkMode">
-            🌙 Dark Mode
-        </button>
-    </header>
+        <button id="darkMode">🌙 Dark Mode</button>
 
-    <main>
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- Category Legend -->
+
+    <section class="legend">
+
+        <h2>Element Categories</h2>
+
+        <div class="legend-container">
+
+            <span><i class="legend-box alkali"></i> Alkali Metals</span>
+
+            <span><i class="legend-box alkaline"></i> Alkaline Earth Metals</span>
+
+            <span><i class="legend-box transition"></i> Transition Metals</span>
+
+            <span><i class="legend-box post-transition"></i> Post-Transition Metals</span>
+
+            <span><i class="legend-box metalloid"></i> Metalloids</span>
+
+            <span><i class="legend-box nonmetal"></i> Nonmetals</span>
+
+            <span><i class="legend-box halogen"></i> Halogens</span>
+
+            <span><i class="legend-box noble"></i> Noble Gases</span>
+
+            <span><i class="legend-box lanthanide"></i> Lanthanides</span>
+
+            <span><i class="legend-box actinide"></i> Actinides</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- Periodic Table -->
+
+    <section>
 
         <div id="periodic-table"></div>
 
-        <section id="info-box">
-            <h2>Select an Element</h2>
-            <p>
-                Click on any element to see its information.
-            </p>
-        </section>
+    </section>
 
-    </main>
 
-    <footer>
-        <p>Made with HTML, CSS & JavaScript 🚀</p>
-    </footer>
+    <!-- Element Information -->
 
-    <script src="script.js"></script>
+    <section id="info-box">
+
+        <h2>Select an Element</h2>
+
+        <p>
+            Click on any element to see its information.
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Interactive Periodic Table • Built with HTML, CSS & JavaScript
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
