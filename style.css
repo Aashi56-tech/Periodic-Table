@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 30px;
+}
+
+h1 {
+    color: #222;
+}
+
+.subtitle {
+    color: #666;
+}
+
+#periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 60px);
+    gap: 5px;
+    justify-content: center;
+    margin: 30px auto;
+    overflow-x: auto;
+}
+
+.element {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.element:hover {
+    transform: scale(1.1);
+}
+
+.number {
+    font-size: 10px;
+}
+
+.symbol {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.name {
+    font-size: 8px;
+}
+
+/* Element categories */
+
+.alkali {
+    background: #ffb3b3;
+}
+
+.alkaline {
+    background: #ffd699;
+}
+
+.transition {
+    background: #fff2a8;
+}
+
+.post-transition {
+    background: #c8e6c9;
+}
+
+.metalloid {
+    background: #b3e5fc;
+}
+
+.nonmetal {
+    background: #d1c4e9;
+}
+
+.halogen {
+    background: #f8bbd0;
+}
+
+.noble {
+    background: #b2dfdb;
+}
+
+.lanthanide {
+    background: #d7ccc8;
+}
+
+.actinide {
+    background: #f0bfff;
+}
+
+#info-box {
+    background: white;
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #aaa;
+}
