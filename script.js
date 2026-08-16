@@ -305,3 +305,237 @@ darkMode.addEventListener("click", () => {
     }
 
 });
+
+// =========================================
+// QUIZ MODE
+// =========================================
+
+const quizMode = document.getElementById("quizMode");
+const quizBox = document.getElementById("quiz-box");
+const question = document.getElementById("question");
+const answers = document.getElementById("answers");
+const quizResult = document.getElementById("quiz-result");
+const nextQuestion = document.getElementById("next-question");
+const exitQuiz = document.getElementById("exit-quiz");
+const scoreDisplay = document.getElementById("score");
+
+let quizScore = 0;
+let currentAnswer = "";
+let quizActive = false;
+
+
+// OPEN QUIZ
+quizMode.addEventListener("click", () => {
+
+    quizActive = true;
+
+    quizBox.classList.remove("hidden");
+
+    quizBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    quizScore = 0;
+
+    scoreDisplay.textContent = "Score: 0";
+
+    createQuestion();
+
+});
+
+
+// CREATE QUESTION
+function createQuestion() {
+
+    quizResult.textContent = "";
+
+    answers.innerHTML = "";
+
+    nextQuestion.style.display = "none";
+
+
+    // Pick random element
+
+    const randomElement =
+        elements[Math.floor(Math.random() * elements.length)];
+
+
+    const number = randomElement[0];
+    const symbol = randomElement[1];
+    const name = randomElement[2];
+
+
+    // Random question type
+
+    const questionType =
+        Math.floor(Math.random() * 3);
+
+
+    let correctAnswer;
+    let questionText;
+
+
+    if (questionType === 0) {
+
+        questionText =
+            `Which element has the symbol "${symbol}"?`;
+
+        correctAnswer = name;
+
+    }
+
+    else if (questionType === 1) {
+
+        questionText =
+            `What is the symbol of ${name}?`;
+
+        correctAnswer = symbol;
+
+    }
+
+    else {
+
+        questionText =
+            `Which element has atomic number ${number}?`;
+
+        correctAnswer = name;
+
+    }
+
+
+    currentAnswer = correctAnswer;
+
+    question.textContent = questionText;
+
+
+    // CREATE WRONG ANSWERS
+
+    const wrongAnswers = [];
+
+
+    while (wrongAnswers.length < 3) {
+
+        const random =
+            elements[
+                Math.floor(Math.random() * elements.length)
+            ];
+
+        const wrongAnswer =
+            questionType === 1
+                ? random[1]
+                : random[2];
+
+
+        if (
+            wrongAnswer !== correctAnswer &&
+            !wrongAnswers.includes(wrongAnswer)
+        ) {
+
+            wrongAnswers.push(wrongAnswer);
+
+        }
+
+    }
+
+
+    // COMBINE ANSWERS
+
+    const allAnswers = [
+        correctAnswer,
+        ...wrongAnswers
+    ];
+
+
+    // SHUFFLE ANSWERS
+
+    allAnswers.sort(() => Math.random() - 0.5);
+
+
+    // DISPLAY ANSWERS
+
+    allAnswers.forEach(answer => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "quiz-answer";
+
+        button.textContent = answer;
+
+        button.addEventListener("click", () => {
+
+            checkAnswer(answer);
+
+        });
+
+        answers.appendChild(button);
+
+    });
+
+}
+
+
+// CHECK ANSWER
+
+function checkAnswer(answer) {
+
+    const buttons =
+        document.querySelectorAll(".quiz-answer");
+
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+    });
+
+
+    if (answer === currentAnswer) {
+
+        quizScore++;
+
+        scoreDisplay.textContent =
+            `Score: ${quizScore}`;
+
+        quizResult.textContent =
+            "🎉 Correct! Great job!";
+
+    }
+
+    else {
+
+        quizResult.textContent =
+            `❌ Not quite! The correct answer is ${currentAnswer}.`;
+
+    }
+
+
+    nextQuestion.style.display = "inline-block";
+
+}
+
+
+// NEXT QUESTION
+
+nextQuestion.addEventListener("click", () => {
+
+    createQuestion();
+
+});
+
+
+// EXIT QUIZ
+
+exitQuiz.addEventListener("click", () => {
+
+    quizActive = false;
+
+    quizBox.classList.add("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
