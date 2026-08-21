@@ -504,7 +504,48 @@ function displayElements(list) {
 
                 <hr>
 
-                <h3>⚛️ Electron Configuration</h3>
+function createElectronDiagram(atomicNumber, symbol) {
+    const shells = getShellDistribution(atomicNumber);
+    const atom = document.createElement("div");
+    atom.className = "atom";
+
+    // Nucleus
+    const nucleus = document.createElement("div");
+    nucleus.className = "nucleus";
+    nucleus.textContent = symbol;
+    atom.appendChild(nucleus);
+
+    // Different colors for each shell
+    const shellColors = ["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4", "#ffeaa7", "#dfe6e9", "#a29bfe"];
+
+    shells.forEach((electronCount, shellIndex) => {
+        const shell = document.createElement("div");
+        shell.className = `shell shell-${shellIndex + 1}`;
+        shell.style.borderColor = shellColors[shellIndex] || "#888";
+
+        for (let i = 0; i < electronCount; i++) {
+            const electron = document.createElement("span");
+            electron.className = "electron";
+            electron.style.background = shellColors[shellIndex] || "#333";
+
+            // Better angle calculation
+            const angle = (360 / electronCount) * i - 90; // start from top
+            const radius = 48; // slightly less than 50 so they sit nicely on the ring
+
+            const x = 50 + radius * Math.cos(angle * Math.PI / 180);
+            const y = 50 + radius * Math.sin(angle * Math.PI / 180);
+
+            electron.style.left = `${x}%`;
+            electron.style.top = `${y}%`;
+
+            shell.appendChild(electron);
+        }
+
+        atom.appendChild(shell);
+    });
+
+    return atom;
+}
 
                 <p>
                     <strong>Orbital configuration:</strong>
