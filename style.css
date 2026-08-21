@@ -603,84 +603,92 @@ body.dark {
 
 }
 
-/* ELECTRON SHELL DIAGRAM */
+/* =========================================
+   ELECTRON SHELL DIAGRAM (IMPROVED)
+========================================= */
 
-.shell-diagram {
-    margin: 25px auto;
-    text-align: center;
-}
-
-.shell-container {
+.atom {
+    width: 380px;
+    height: 380px;
+    margin: 30px auto;
     position: relative;
-    width: 280px;
-    height: 280px;
-    margin: 20px auto;
 }
 
-.shell {
-    position: absolute;
-    border: 3px solid #555;
-    border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.shell-1 {
+/* Nucleus */
+.nucleus {
     width: 70px;
     height: 70px;
-}
-
-.shell-2 {
-    width: 130px;
-    height: 130px;
-}
-
-.shell-3 {
-    width: 190px;
-    height: 190px;
-}
-
-.shell-4 {
-    width: 250px;
-    height: 250px;
-}
-
-.nucleus {
-    position: absolute;
-    width: 45px;
-    height: 45px;
     border-radius: 50%;
-    background: #ddd;
-    color: #222;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    z-index: 5;
-}
-
-.shell-label {
-    margin: 6px;
-}
-
-body.dark .shell {
-    border-color: #aaa;
-}
-
-body.dark .nucleus {
-    background: #444;
+    background: linear-gradient(135deg, #555, #222);
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-weight: bold;
+    z-index: 20;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-.electron {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    box-shadow: 0 0 6px currentColor;
+/* Shells */
+.shell {
     position: absolute;
+    border: 2px solid;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
+    animation: spin linear infinite;
+}
+
+.shell-1 { width: 110px; height: 110px; animation-duration: 8s;  border-color: #ff6b6b; }
+.shell-2 { width: 170px; height: 170px; animation-duration: 12s; border-color: #4ecdc4; }
+.shell-3 { width: 230px; height: 230px; animation-duration: 16s; border-color: #45b7d1; }
+.shell-4 { width: 290px; height: 290px; animation-duration: 22s; border-color: #96ceb4; }
+.shell-5 { width: 340px; height: 340px; animation-duration: 28s; border-color: #ffeaa7; }
+.shell-6 { width: 360px; height: 360px; animation-duration: 35s; border-color: #a29bfe; }
+.shell-7 { width: 380px; height: 380px; animation-duration: 42s; border-color: #fd79a8; }
+
+/* Electrons */
+.electron {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    box-shadow: 0 0 8px currentColor;
+}
+
+/* Make electrons spin opposite so they don’t look weird */
+.electron {
+    animation: counter-spin linear infinite;
+}
+
+.shell-1 .electron { animation-duration: 8s; }
+.shell-2 .electron { animation-duration: 12s; }
+.shell-3 .electron { animation-duration: 16s; }
+.shell-4 .electron { animation-duration: 22s; }
+.shell-5 .electron { animation-duration: 28s; }
+.shell-6 .electron { animation-duration: 35s; }
+.shell-7 .electron { animation-duration: 42s; }
+
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes counter-spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+/* Dark mode support */
+body.dark .nucleus {
+    background: linear-gradient(135deg, #aaa, #666);
+    color: #111;
 }
