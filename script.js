@@ -503,7 +503,6 @@ function displayElements(list) {
                 </p>
 
                 <hr>
-
 function createElectronDiagram(atomicNumber, symbol) {
     const shells = getShellDistribution(atomicNumber);
     const atom = document.createElement("div");
@@ -515,22 +514,30 @@ function createElectronDiagram(atomicNumber, symbol) {
     nucleus.textContent = symbol;
     atom.appendChild(nucleus);
 
-    // Different colors for each shell
-    const shellColors = ["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4", "#ffeaa7", "#dfe6e9", "#a29bfe"];
+    // Nice colors for each shell
+    const shellColors = [
+        "#ff6b6b", // K
+        "#4ecdc4", // L
+        "#45b7d1", // M
+        "#96ceb4", // N
+        "#ffeaa7", // O
+        "#a29bfe", // P
+        "#fd79a8"  // Q
+    ];
 
     shells.forEach((electronCount, shellIndex) => {
         const shell = document.createElement("div");
         shell.className = `shell shell-${shellIndex + 1}`;
-        shell.style.borderColor = shellColors[shellIndex] || "#888";
 
         for (let i = 0; i < electronCount; i++) {
             const electron = document.createElement("span");
             electron.className = "electron";
             electron.style.background = shellColors[shellIndex] || "#333";
+            electron.style.color = shellColors[shellIndex] || "#333"; // for the glow
 
-            // Better angle calculation
+            // Place electrons evenly around the circle
             const angle = (360 / electronCount) * i - 90; // start from top
-            const radius = 48; // slightly less than 50 so they sit nicely on the ring
+            const radius = 48; // percentage inside the shell
 
             const x = 50 + radius * Math.cos(angle * Math.PI / 180);
             const y = 50 + radius * Math.sin(angle * Math.PI / 180);
