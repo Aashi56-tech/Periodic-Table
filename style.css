@@ -692,3 +692,28 @@ body.dark .nucleus {
     background: linear-gradient(135deg, #aaa, #666);
     color: #111;
 }
+
+/* =========================================
+   SHELL COUNTS (K, L, M labels)
+========================================= */
+
+.shell-counts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.shell-count {
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: #e8e8e8;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+body.dark .shell-count {
+    background: #333;
+    color: white;
+}
