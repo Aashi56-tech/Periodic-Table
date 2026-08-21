@@ -1,13 +1,11 @@
-// ======================================================
-// INTERACTIVE PERIODIC TABLE
-// COMPLETE JAVASCRIPT
-// ======================================================
+// ============================================================
+// INTERACTIVE PERIODIC TABLE - COMPLETE JAVASCRIPT
+// ============================================================
 
 
-// ======================================================
+// ============================================================
 // ELEMENT DATA
-// [Atomic Number, Symbol, Name, Atomic Mass, Category, Period, Group]
-// ======================================================
+// ============================================================
 
 const elements = [
 
@@ -142,147 +140,283 @@ const elements = [
 ];
 
 
-// ======================================================
-// FACTS + ELECTRON CONFIGURATIONS
-// ======================================================
+// ============================================================
+// FACTS FOR ELEMENTS
+// ============================================================
 
 const facts = {
 
-H:["Hydrogen is the lightest element and the most abundant element in the universe.","1s¹"],
-He:["Helium is a noble gas commonly used in balloons.","1s²"],
+H:"Hydrogen is the lightest element and the most abundant element in the universe.",
+He:"Helium is a very light noble gas and is commonly used in balloons.",
 
-Li:["Lithium is the lightest metal and is used in rechargeable batteries.","[He] 2s¹"],
-Be:["Beryllium is a lightweight and strong alkaline earth metal.","[He] 2s²"],
-B:["Boron is a metalloid used in glass, ceramics and detergents.","[He] 2s² 2p¹"],
-C:["Carbon is the basis of many compounds found in living organisms.","[He] 2s² 2p²"],
-N:["Nitrogen makes up about 78% of Earth's atmosphere.","[He] 2s² 2p³"],
-O:["Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.","[He] 2s² 2p⁴"],
-F:["Fluorine is the most reactive halogen.","[He] 2s² 2p⁵"],
-Ne:["Neon is a noble gas famous for its use in glowing signs.","[He] 2s² 2p⁶"],
+Li:"Lithium is a soft, reactive metal commonly used in rechargeable batteries.",
+Be:"Beryllium is a lightweight metal used in aerospace materials.",
+B:"Boron is a metalloid used in glass, ceramics and detergents.",
+C:"Carbon is the basis of life and forms millions of different compounds.",
+N:"Nitrogen makes up about 78% of Earth's atmosphere.",
+O:"Oxygen is essential for respiration and makes up about 21% of Earth's atmosphere.",
+F:"Fluorine is the most electronegative element.",
+Ne:"Neon is a noble gas famous for its use in bright advertising signs.",
 
-Na:["Sodium is a highly reactive alkali metal.","[Ne] 3s¹"],
-Mg:["Magnesium is a lightweight metal important in many alloys.","[Ne] 3s²"],
-Al:["Aluminium is lightweight and resistant to corrosion.","[Ne] 3s² 3p¹"],
-Si:["Silicon is an important semiconductor used in computer technology.","[Ne] 3s² 3p²"],
-P:["Phosphorus is important in DNA, bones and energy transfer.","[Ne] 3s² 3p³"],
-S:["Sulfur is a yellow nonmetal found in many minerals.","[Ne] 3s² 3p⁴"],
-Cl:["Chlorine is commonly used to disinfect water.","[Ne] 3s² 3p⁵"],
-Ar:["Argon is an unreactive noble gas used in lighting and welding.","[Ne] 3s² 3p⁶"],
+Na:"Sodium is a highly reactive alkali metal and reacts strongly with water.",
+Mg:"Magnesium is a lightweight metal important in many biological processes.",
+Al:"Aluminium is a lightweight metal widely used in aircraft, cans and construction.",
+Si:"Silicon is a semiconductor widely used in computer chips.",
+P:"Phosphorus is important in DNA, bones and energy transfer in living organisms.",
+S:"Sulfur is a yellow nonmetal used in fertilizers and sulfuric acid production.",
+Cl:"Chlorine is a reactive halogen commonly used to disinfect water.",
+Ar:"Argon is a noble gas used in lighting and welding.",
 
-K:["Potassium is a very reactive alkali metal.","[Ar] 4s¹"],
-Ca:["Calcium is important for strong bones and teeth.","[Ar] 4s²"],
-Sc:["Scandium is used in some lightweight metal alloys.","[Ar] 3d¹ 4s²"],
-Ti:["Titanium is strong, lightweight and corrosion-resistant.","[Ar] 3d² 4s²"],
-V:["Vanadium is used to strengthen steel.","[Ar] 3d³ 4s²"],
-Cr:["Chromium is known for its shiny appearance and corrosion resistance.","[Ar] 3d⁵ 4s¹"],
-Mn:["Manganese is widely used in steel production.","[Ar] 3d⁵ 4s²"],
-Fe:["Iron is an important metal used in construction and manufacturing.","[Ar] 3d⁶ 4s²"],
-Co:["Cobalt is used in alloys and rechargeable battery materials.","[Ar] 3d⁷ 4s²"],
-Ni:["Nickel is corrosion-resistant and is used in many alloys.","[Ar] 3d⁸ 4s²"],
-Cu:["Copper is an excellent conductor of electricity.","[Ar] 3d¹⁰ 4s¹"],
-Zn:["Zinc is commonly used to protect iron and steel from corrosion.","[Ar] 3d¹⁰ 4s²"],
-Ga:["Gallium can melt in the palm of your hand because of its low melting point.","[Ar] 3d¹⁰ 4s² 4p¹"],
-Ge:["Germanium is a metalloid used in semiconductor technology.","[Ar] 3d¹⁰ 4s² 4p²"],
-As:["Arsenic is a metalloid found naturally in minerals.","[Ar] 3d¹⁰ 4s² 4p³"],
-Se:["Selenium is a nonmetal used in some electronic and industrial applications.","[Ar] 3d¹⁰ 4s² 4p⁴"],
-Br:["Bromine is a reddish-brown liquid at room temperature.","[Ar] 3d¹⁰ 4s² 4p⁵"],
-Kr:["Krypton is a noble gas used in specialized lighting.","[Ar] 3d¹⁰ 4s² 4p⁶"],
+K:"Potassium is an important element for nerve and muscle function.",
+Ca:"Calcium is important for strong bones and teeth.",
+Sc:"Scandium is a relatively rare metal used in specialized alloys.",
+Ti:"Titanium is strong, lightweight and resistant to corrosion.",
+V:"Vanadium is used to strengthen steel and other alloys.",
+Cr:"Chromium is responsible for the shiny appearance of chrome-plated surfaces.",
+Mn:"Manganese is important in steel production.",
+Fe:"Iron is one of the most widely used metals and is essential for hemoglobin.",
+Co:"Cobalt is used in batteries and high-strength alloys.",
+Ni:"Nickel is corrosion-resistant and is used in stainless steel.",
+Cu:"Copper is an excellent conductor of electricity.",
+Zn:"Zinc is used to protect iron from corrosion by galvanization.",
+Ga:"Gallium can melt in your hand because of its low melting point.",
+Ge:"Germanium is a semiconductor used in some electronic and optical devices.",
+As:"Arsenic is a metalloid that is toxic in many chemical forms.",
+Se:"Selenium is a trace element needed by the human body in small amounts.",
+Br:"Bromine is a reddish-brown liquid at room temperature.",
+Kr:"Krypton is a noble gas used in some specialized lamps.",
 
-Rb:["Rubidium is a very reactive alkali metal.","[Kr] 5s¹"],
-Sr:["Strontium is an alkaline earth metal used in some fireworks.","[Kr] 5s²"],
-Y:["Yttrium is used in some phosphors and advanced materials.","[Kr] 4d¹ 5s²"],
-Zr:["Zirconium is highly resistant to corrosion.","[Kr] 4d² 5s²"],
-Nb:["Niobium is used in strong alloys and superconducting materials.","[Kr] 4d⁴ 5s¹"],
-Mo:["Molybdenum has a very high melting point.","[Kr] 4d⁵ 5s¹"],
-Tc:["Technetium is the first element to have no stable isotopes.","[Kr] 4d⁵ 5s²"],
-Ru:["Ruthenium is a hard transition metal used in specialized alloys.","[Kr] 4d⁷ 5s¹"],
-Rh:["Rhodium is a rare metal used in catalytic converters.","[Kr] 4d⁸ 5s¹"],
-Pd:["Palladium is used in catalytic converters and electronics.","[Kr] 4d¹⁰"],
-Ag:["Silver has the highest electrical conductivity of any element.","[Kr] 4d¹⁰ 5s¹"],
-Cd:["Cadmium is a soft metal used in some specialized applications.","[Kr] 4d¹⁰ 5s²"],
-In:["Indium is a soft metal used in electronic displays.","[Kr] 4d¹⁰ 5s² 5p¹"],
-Sn:["Tin is widely used in solder and protective coatings.","[Kr] 4d¹⁰ 5s² 5p²"],
-Sb:["Antimony is a metalloid used in alloys and flame-retardant materials.","[Kr] 4d¹⁰ 5s² 5p³"],
-Te:["Tellurium is a metalloid used in some solar cells.","[Kr] 4d¹⁰ 5s² 5p⁴"],
-I:["Iodine is important for the production of thyroid hormones.","[Kr] 4d¹⁰ 5s² 5p⁵"],
-Xe:["Xenon is a noble gas used in specialized lamps.","[Kr] 4d¹⁰ 5s² 5p⁶"],
+Rb:"Rubidium is a soft, highly reactive alkali metal.",
+Sr:"Strontium compounds can produce a bright red color in fireworks.",
+Y:"Yttrium is used in some lasers, LEDs and advanced materials.",
+Zr:"Zirconium is highly resistant to corrosion.",
+Nb:"Niobium is used in strong alloys and superconducting materials.",
+Mo:"Molybdenum is important in high-strength steels.",
+Tc:"Technetium was the first element to be produced artificially.",
+Ru:"Ruthenium is a hard metal used in electronics and catalysts.",
+Rh:"Rhodium is a rare metal often used in catalytic converters.",
+Pd:"Palladium is a valuable metal used in catalysts and electronics.",
+Ag:"Silver has the highest electrical conductivity of any element.",
+Cd:"Cadmium is a soft metal historically used in batteries and coatings.",
+In:"Indium is a soft metal used in touchscreens and semiconductors.",
+Sn:"Tin is used to coat other metals and in solder.",
+Sb:"Antimony is a metalloid used in alloys and flame-retardant materials.",
+Te:"Tellurium is a metalloid used in solar cells and alloys.",
+I:"Iodine is important for the production of thyroid hormones.",
+Xe:"Xenon is a noble gas used in specialized lamps.",
 
-Cs:["Caesium is an extremely reactive alkali metal.","[Xe] 6s¹"],
-Ba:["Barium is an alkaline earth metal used in several compounds.","[Xe] 6s²"],
-La:["Lanthanum is a rare-earth element used in optical glass and alloys.","[Xe] 5d¹ 6s²"],
+Cs:"Caesium is an extremely reactive alkali metal.",
+Ba:"Barium compounds are used in medical imaging and other applications.",
+La:"Lanthanum is a soft rare-earth metal used in optical glass and batteries.",
 
-Hf:["Hafnium is a corrosion-resistant metal with a high melting point.","[Xe] 4f¹⁴ 5d² 6s²"],
-Ta:["Tantalum is highly corrosion-resistant and used in electronic components.","[Xe] 4f¹⁴ 5d³ 6s²"],
-W:["Tungsten has the highest melting point of all metals.","[Xe] 4f¹⁴ 5d⁴ 6s²"],
-Re:["Rhenium has one of the highest melting points of all elements.","[Xe] 4f¹⁴ 5d⁵ 6s²"],
-Os:["Osmium is one of the densest naturally occurring elements.","[Xe] 4f¹⁴ 5d⁶ 6s²"],
-Ir:["Iridium is extremely dense and corrosion-resistant.","[Xe] 4f¹⁴ 5d⁷ 6s²"],
-Pt:["Platinum is a valuable metal widely used as a catalyst.","[Xe] 4f¹⁴ 5d⁹ 6s¹"],
-Au:["Gold is a highly unreactive metal and has been valued for thousands of years.","[Xe] 4f¹⁴ 5d¹⁰ 6s¹"],
-Hg:["Mercury is a metal that is liquid at room temperature.","[Xe] 4f¹⁴ 5d¹⁰ 6s²"],
-Tl:["Thallium is a soft and dense post-transition metal.","[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹"],
-Pb:["Lead is a dense and relatively soft metal.","[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²"],
-Bi:["Bismuth is a heavy metal with a relatively low toxicity compared with many heavy metals.","[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³"],
-Po:["Polonium is a rare radioactive element.","[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴"],
-At:["Astatine is a very rare radioactive halogen.","[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵"],
-Rn:["Radon is a radioactive noble gas.","[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶"],
+Ce:"Cerium is the most abundant rare-earth element.",
+Pr:"Praseodymium is used in special glass and powerful magnets.",
+Nd:"Neodymium is used to make very strong permanent magnets.",
+Pm:"Promethium is a radioactive rare-earth element.",
+Sm:"Samarium is used in powerful magnets and some nuclear applications.",
+Eu:"Europium is used in phosphors that produce red and blue colors.",
+Gd:"Gadolinium is used in some medical imaging contrast agents.",
+Tb:"Terbium is used in phosphors and specialized electronic materials.",
+Dy:"Dysprosium is important in high-performance permanent magnets.",
+Ho:"Holmium has useful magnetic properties.",
+Er:"Erbium is used in optical-fiber communication systems.",
+Tm:"Thulium is one of the rarest naturally occurring lanthanides.",
+Yb:"Ytterbium is a soft rare-earth metal used in specialized materials.",
+Lu:"Lutetium is the densest and hardest lanthanide.",
 
-Fr:["Francium is an extremely rare and highly radioactive alkali metal.","[Rn] 7s¹"],
-Ra:["Radium is a radioactive alkaline earth metal.","[Rn] 7s²"],
-Ac:["Actinium is a radioactive actinide element.","[Rn] 6d¹ 7s²"],
+Hf:"Hafnium is resistant to corrosion and has a high melting point.",
+Ta:"Tantalum is highly corrosion-resistant and used in electronic components.",
+W:"Tungsten has the highest melting point of all metals.",
+Re:"Rhenium is one of the rarest elements in Earth's crust.",
+Os:"Osmium is an extremely dense metal.",
+Ir:"Iridium is highly resistant to corrosion.",
+Pt:"Platinum is a valuable metal widely used as a catalyst.",
+Au:"Gold is highly unreactive and has been valued for thousands of years.",
+Hg:"Mercury is a metal that is liquid at room temperature.",
+Tl:"Thallium is a soft metal and many of its compounds are toxic.",
+Pb:"Lead is a dense metal that has been used for thousands of years.",
+Bi:"Bismuth is a heavy metal with relatively low toxicity compared with many other heavy metals.",
+Po:"Polonium is a radioactive element discovered by Marie Curie.",
+At:"Astatine is an extremely rare radioactive halogen.",
+Rn:"Radon is a radioactive noble gas.",
 
-Rf:["Rutherfordium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d² 7s²"],
-Db:["Dubnium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d³ 7s²"],
-Sg:["Seaborgium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d⁴ 7s²"],
-Bh:["Bohrium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d⁵ 7s²"],
-Hs:["Hassium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d⁶ 7s²"],
-Mt:["Meitnerium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d⁷ 7s²"],
-Ds:["Darmstadtium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d⁸ 7s²"],
-Rg:["Roentgenium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d⁹ 7s²"],
-Cn:["Copernicium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d¹⁰ 7s²"],
-Nh:["Nihonium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹"],
-Fl:["Flerovium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²"],
-Mc:["Moscovium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³"],
-Lv:["Livermorium is a synthetic radioactive element.","[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴"],
-Ts:["Tennessine is a synthetic radioactive halogen.","[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵"],
-Og:["Oganesson is a synthetic superheavy noble gas.","[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶"],
+Fr:"Francium is an extremely rare and highly radioactive alkali metal.",
+Ra:"Radium is a radioactive alkaline-earth metal.",
+Ac:"Actinium is a radioactive element that gives its name to the actinide series.",
 
-Ce:["Cerium is a rare-earth element used in glass polishing and catalytic converters.","[Xe] 4f¹ 5d¹ 6s²"],
-Pr:["Praseodymium is a rare-earth element used in magnets and special glasses.","[Xe] 4f³ 6s²"],
-Nd:["Neodymium is widely used in powerful permanent magnets.","[Xe] 4f⁴ 6s²"],
-Pm:["Promethium is a radioactive lanthanide with no stable isotopes.","[Xe] 4f⁵ 6s²"],
-Sm:["Samarium is used in powerful magnets and some nuclear applications.","[Xe] 4f⁶ 6s²"],
-Eu:["Europium is important in red and blue phosphors used in displays.","[Xe] 4f⁷ 6s²"],
-Gd:["Gadolinium is used in magnets and some medical imaging applications.","[Xe] 4f⁷ 5d¹ 6s²"],
-Tb:["Terbium is used in green phosphors and specialized materials.","[Xe] 4f⁹ 6s²"],
-Dy:["Dysprosium is used in high-performance magnets.","[Xe] 4f¹⁰ 6s²"],
-Ho:["Holmium has strong magnetic properties.","[Xe] 4f¹¹ 6s²"],
-Er:["Erbium is used in optical fibers and lasers.","[Xe] 4f¹² 6s²"],
-Tm:["Thulium is the least abundant naturally occurring lanthanide.","[Xe] 4f¹³ 6s²"],
-Yb:["Ytterbium is a soft rare-earth metal used in specialized materials.","[Xe] 4f¹⁴ 6s²"],
-Lu:["Lutetium is the densest and hardest lanthanide.","[Xe] 4f¹⁴ 5d¹ 6s²"],
+Th:"Thorium is a naturally occurring radioactive element.",
+Pa:"Protactinium is a rare radioactive actinide.",
+U:"Uranium is a naturally occurring radioactive element.",
+Np:"Neptunium is a radioactive actinide.",
+Pu:"Plutonium is a radioactive element used in nuclear technology.",
+Am:"Americium is a radioactive element used in some smoke detectors.",
+Cm:"Curium is a radioactive actinide named after Marie and Pierre Curie.",
+Bk:"Berkelium is a synthetic radioactive element.",
+Cf:"Californium is a radioactive element used in specialized neutron sources.",
+Es:"Einsteinium is a synthetic radioactive element named after Albert Einstein.",
+Fm:"Fermium is a synthetic radioactive element named after Enrico Fermi.",
+Md:"Mendelevium is a synthetic element named after Dmitri Mendeleev.",
+No:"Nobelium is a synthetic radioactive element named after Alfred Nobel.",
+Lr:"Lawrencium is a synthetic actinide named after Ernest Lawrence.",
 
-Th:["Thorium is a naturally occurring radioactive actinide.","[Rn] 6d² 7s²"],
-Pa:["Protactinium is a rare radioactive actinide.","[Rn] 5f² 6d¹ 7s²"],
-U:["Uranium is a naturally occurring radioactive element.","[Rn] 5f³ 6d¹ 7s²"],
-Np:["Neptunium is a radioactive actinide element.","[Rn] 5f⁴ 6d¹ 7s²"],
-Pu:["Plutonium is a radioactive actinide element.","[Rn] 5f⁶ 7s²"],
-Am:["Americium is a synthetic radioactive actinide.","[Rn] 5f⁷ 7s²"],
-Cm:["Curium is a synthetic radioactive actinide.","[Rn] 5f⁷ 6d¹ 7s²"],
-Bk:["Berkelium is a synthetic radioactive actinide.","[Rn] 5f⁹ 7s²"],
-Cf:["Californium is a synthetic radioactive actinide.","[Rn] 5f¹⁰ 7s²"],
-Es:["Einsteinium is a synthetic radioactive actinide.","[Rn] 5f¹¹ 7s²"],
-Fm:["Fermium is a synthetic radioactive actinide.","[Rn] 5f¹² 7s²"],
-Md:["Mendelevium is a synthetic radioactive actinide.","[Rn] 5f¹³ 7s²"],
-No:["Nobelium is a synthetic radioactive actinide.","[Rn] 5f¹⁴ 7s²"],
-Lr:["Lawrencium is a synthetic radioactive actinide.","[Rn] 5f¹⁴ 7s² 7p¹"]
+Rf:"Rutherfordium is a synthetic radioactive element named after Ernest Rutherford.",
+Db:"Dubnium is a synthetic element named after the city of Dubna.",
+Sg:"Seaborgium is a synthetic element named after Glenn Seaborg.",
+Bh:"Bohrium is a synthetic element named after Niels Bohr.",
+Hs:"Hassium is a synthetic element named after the German state of Hesse.",
+Mt:"Meitnerium is a synthetic element named after Lise Meitner.",
+Ds:"Darmstadtium is a synthetic element named after Darmstadt, Germany.",
+Rg:"Roentgenium is a synthetic element named after Wilhelm Röntgen.",
+Cn:"Copernicium is a synthetic element named after Nicolaus Copernicus.",
+Nh:"Nihonium is a synthetic element named after Japan.",
+Fl:"Flerovium is a synthetic element named after the Flerov Laboratory.",
+Mc:"Moscovium is a synthetic element named after the Moscow region.",
+Lv:"Livermorium is a synthetic element named after the Lawrence Livermore National Laboratory.",
+Ts:"Tennessine is a synthetic element named after Tennessee.",
+Og:"Oganesson is a synthetic element named after physicist Yuri Oganessian."
 
 };
 
 
-// ======================================================
-// DOM ELEMENTS
-// ======================================================
+// ============================================================
+// ELECTRON CONFIGURATIONS
+// ============================================================
+
+const electronConfigurations = {
+
+H:"1s¹",
+He:"1s²",
+
+Li:"1s² 2s¹",
+Be:"1s² 2s²",
+B:"1s² 2s² 2p¹",
+C:"1s² 2s² 2p²",
+N:"1s² 2s² 2p³",
+O:"1s² 2s² 2p⁴",
+F:"1s² 2s² 2p⁵",
+Ne:"1s² 2s² 2p⁶",
+
+Na:"[Ne] 3s¹",
+Mg:"[Ne] 3s²",
+Al:"[Ne] 3s² 3p¹",
+Si:"[Ne] 3s² 3p²",
+P:"[Ne] 3s² 3p³",
+S:"[Ne] 3s² 3p⁴",
+Cl:"[Ne] 3s² 3p⁵",
+Ar:"[Ne] 3s² 3p⁶",
+
+K:"[Ar] 4s¹",
+Ca:"[Ar] 4s²",
+Sc:"[Ar] 3d¹ 4s²",
+Ti:"[Ar] 3d² 4s²",
+V:"[Ar] 3d³ 4s²",
+Cr:"[Ar] 3d⁵ 4s¹",
+Mn:"[Ar] 3d⁵ 4s²",
+Fe:"[Ar] 3d⁶ 4s²",
+Co:"[Ar] 3d⁷ 4s²",
+Ni:"[Ar] 3d⁸ 4s²",
+Cu:"[Ar] 3d¹⁰ 4s¹",
+Zn:"[Ar] 3d¹⁰ 4s²",
+Ga:"[Ar] 3d¹⁰ 4s² 4p¹",
+Ge:"[Ar] 3d¹⁰ 4s² 4p²",
+As:"[Ar] 3d¹⁰ 4s² 4p³",
+Se:"[Ar] 3d¹⁰ 4s² 4p⁴",
+Br:"[Ar] 3d¹⁰ 4s² 4p⁵",
+Kr:"[Ar] 3d¹⁰ 4s² 4p⁶",
+
+Rb:"[Kr] 5s¹",
+Sr:"[Kr] 5s²",
+Y:"[Kr] 4d¹ 5s²",
+Zr:"[Kr] 4d² 5s²",
+Nb:"[Kr] 4d⁴ 5s¹",
+Mo:"[Kr] 4d⁵ 5s¹",
+Tc:"[Kr] 4d⁵ 5s²",
+Ru:"[Kr] 4d⁷ 5s¹",
+Rh:"[Kr] 4d⁸ 5s¹",
+Pd:"[Kr] 4d¹⁰",
+Ag:"[Kr] 4d¹⁰ 5s¹",
+Cd:"[Kr] 4d¹⁰ 5s²",
+In:"[Kr] 4d¹⁰ 5s² 5p¹",
+Sn:"[Kr] 4d¹⁰ 5s² 5p²",
+Sb:"[Kr] 4d¹⁰ 5s² 5p³",
+Te:"[Kr] 4d¹⁰ 5s² 5p⁴",
+I:"[Kr] 4d¹⁰ 5s² 5p⁵",
+Xe:"[Kr] 4d¹⁰ 5s² 5p⁶",
+
+Cs:"[Xe] 6s¹",
+Ba:"[Xe] 6s²",
+La:"[Xe] 5d¹ 6s²",
+Ce:"[Xe] 4f¹ 5d¹ 6s²",
+Pr:"[Xe] 4f³ 6s²",
+Nd:"[Xe] 4f⁴ 6s²",
+Pm:"[Xe] 4f⁵ 6s²",
+Sm:"[Xe] 4f⁶ 6s²",
+Eu:"[Xe] 4f⁷ 6s²",
+Gd:"[Xe] 4f⁷ 5d¹ 6s²",
+Tb:"[Xe] 4f⁹ 6s²",
+Dy:"[Xe] 4f¹⁰ 6s²",
+Ho:"[Xe] 4f¹¹ 6s²",
+Er:"[Xe] 4f¹² 6s²",
+Tm:"[Xe] 4f¹³ 6s²",
+Yb:"[Xe] 4f¹⁴ 6s²",
+Lu:"[Xe] 4f¹⁴ 5d¹ 6s²",
+
+Hf:"[Xe] 4f¹⁴ 5d² 6s²",
+Ta:"[Xe] 4f¹⁴ 5d³ 6s²",
+W:"[Xe] 4f¹⁴ 5d⁴ 6s²",
+Re:"[Xe] 4f¹⁴ 5d⁵ 6s²",
+Os:"[Xe] 4f¹⁴ 5d⁶ 6s²",
+Ir:"[Xe] 4f¹⁴ 5d⁷ 6s²",
+Pt:"[Xe] 4f¹⁴ 5d⁹ 6s¹",
+Au:"[Xe] 4f¹⁴ 5d¹⁰ 6s¹",
+Hg:"[Xe] 4f¹⁴ 5d¹⁰ 6s²",
+Tl:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹",
+Pb:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²",
+Bi:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³",
+Po:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴",
+At:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵",
+Rn:"[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶",
+
+Fr:"[Rn] 7s¹",
+Ra:"[Rn] 7s²",
+Ac:"[Rn] 6d¹ 7s²",
+Th:"[Rn] 6d² 7s²",
+Pa:"[Rn] 5f² 6d¹ 7s²",
+U:"[Rn] 5f³ 6d¹ 7s²",
+Np:"[Rn] 5f⁴ 6d¹ 7s²",
+Pu:"[Rn] 5f⁶ 7s²",
+Am:"[Rn] 5f⁷ 7s²",
+Cm:"[Rn] 5f⁷ 6d¹ 7s²",
+Bk:"[Rn] 5f⁹ 7s²",
+Cf:"[Rn] 5f¹⁰ 7s²",
+Es:"[Rn] 5f¹¹ 7s²",
+Fm:"[Rn] 5f¹² 7s²",
+Md:"[Rn] 5f¹³ 7s²",
+No:"[Rn] 5f¹⁴ 7s²",
+Lr:"[Rn] 5f¹⁴ 7s² 7p¹",
+
+Rf:"[Rn] 5f¹⁴ 6d² 7s²",
+Db:"[Rn] 5f¹⁴ 6d³ 7s²",
+Sg:"[Rn] 5f¹⁴ 6d⁴ 7s²",
+Bh:"[Rn] 5f¹⁴ 6d⁵ 7s²",
+Hs:"[Rn] 5f¹⁴ 6d⁶ 7s²",
+Mt:"[Rn] 5f¹⁴ 6d⁷ 7s²",
+Ds:"[Rn] 5f¹⁴ 6d⁸ 7s²",
+Rg:"[Rn] 5f¹⁴ 6d⁹ 7s²",
+Cn:"[Rn] 5f¹⁴ 6d¹⁰ 7s²",
+Nh:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹",
+Fl:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²",
+Mc:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³",
+Lv:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴",
+Ts:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵",
+Og:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶"
+
+};
+
+
+// ============================================================
+// HTML ELEMENTS
+// ============================================================
 
 const table = document.getElementById("periodic-table");
 const infoBox = document.getElementById("info-box");
@@ -290,102 +424,9 @@ const search = document.getElementById("search");
 const darkMode = document.getElementById("darkMode");
 
 
-// ======================================================
-// ELECTRON SHELL CALCULATOR
-// ======================================================
-
-function getShells(configuration) {
-
-    const shells = {};
-
-    // Remove noble-gas abbreviation
-    const parts = configuration
-        .replace(/\[[A-Za-z]+\]/g, "")
-        .trim()
-        .split(/\s+/);
-
-    parts.forEach(part => {
-
-        const match = part.match(/^(\d)([spdf])(\d+)$/);
-
-        if (!match) return;
-
-        const shell = parseInt(match[1]);
-        const electrons = parseInt(match[3]);
-
-        shells[shell] = (shells[shell] || 0) + electrons;
-    });
-
-
-    // Add electrons from noble gas core
-    if (configuration.startsWith("[He]")) {
-        shells[1] = 2;
-    }
-
-    if (configuration.startsWith("[Ne]")) {
-        shells[1] = 2;
-        shells[2] = 8;
-    }
-
-    if (configuration.startsWith("[Ar]")) {
-        shells[1] = 2;
-        shells[2] = 8;
-        shells[3] = 8;
-    }
-
-    if (configuration.startsWith("[Kr]")) {
-        shells[1] = 2;
-        shells[2] = 8;
-        shells[3] = 18;
-        shells[4] = 8;
-    }
-
-    if (configuration.startsWith("[Xe]")) {
-        shells[1] = 2;
-        shells[2] = 8;
-        shells[3] = 18;
-        shells[4] = 18;
-        shells[5] = 8;
-    }
-
-    if (configuration.startsWith("[Rn]")) {
-        shells[1] = 2;
-        shells[2] = 8;
-        shells[3] = 18;
-        shells[4] = 32;
-        shells[5] = 18;
-        shells[6] = 8;
-    }
-
-    return Object.keys(shells)
-        .sort((a,b) => a-b)
-        .map(n => shells[n]);
-}
-
-
-// ======================================================
-// ELECTRON SHELL DISPLAY
-// ======================================================
-
-function createShellDisplay(shells) {
-
-    const labels = ["K","L","M","N","O","P","Q"];
-
-    return shells.map((electrons, index) => {
-
-        return `
-            <span class="shell-count">
-                ${labels[index] || "Shell " + (index + 1)}: ${electrons}
-            </span>
-        `;
-
-    }).join("");
-}
-
-
-// ======================================================
+// ============================================================
 // DISPLAY ELEMENTS
-// ======================================================
+// ============================================================
 
 function displayElements(list) {
 
@@ -403,14 +444,12 @@ function displayElements(list) {
             group
         ] = element;
 
-
         const box = document.createElement("div");
 
         box.className = `element ${category}`;
 
         box.style.gridRow = period;
         box.style.gridColumn = group;
-
 
         box.innerHTML = `
             <span class="number">${number}</span>
@@ -419,9 +458,74 @@ function displayElements(list) {
         `;
 
 
+        // ====================================================
+        // ELEMENT CLICK
+        // ====================================================
+
         box.addEventListener("click", () => {
 
-            showElementInfo(element);
+            const fact =
+                facts[symbol] ||
+                "Information about this element is being added.";
+
+            const configuration =
+                electronConfigurations[symbol] ||
+                "Configuration not available yet.";
+
+
+            infoBox.innerHTML = `
+
+                <h2>${name} (${symbol})</h2>
+
+                <p>
+                    <strong>Atomic Number:</strong>
+                    ${number}
+                </p>
+
+                <p>
+                    <strong>Atomic Mass:</strong>
+                    ${mass}
+                </p>
+
+                <p>
+                    <strong>Category:</strong>
+                    ${category}
+                </p>
+
+                <p>
+                    <strong>Period:</strong>
+                    ${period}
+                </p>
+
+                <p>
+                    <strong>Group:</strong>
+                    ${group}
+                </p>
+
+                <hr>
+
+                <h3>⚛️ Electron Configuration</h3>
+
+                <p>
+                    <strong>Orbital configuration:</strong>
+                    ${configuration}
+                </p>
+
+                <hr>
+
+                <h3>💡 Did You Know?</h3>
+
+                <p>
+                    ${fact}
+                </p>
+
+            `;
+
+
+            infoBox.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
 
         });
 
@@ -429,345 +533,85 @@ function displayElements(list) {
         table.appendChild(box);
 
     });
-}
-
-
-// ======================================================
-// SHOW ELEMENT INFORMATION
-// ======================================================
-
-function showElementInfo(element) {
-
-    const [
-        number,
-        symbol,
-        name,
-        mass,
-        category,
-        period,
-        group
-    ] = element;
-
-
-    const data = facts[symbol];
-
-
-    const fact =
-        data
-            ? data[0]
-            : "Interesting information about this element will be added soon.";
-
-
-    const orbital =
-        data
-            ? data[1]
-            : "Configuration not available yet.";
-
-
-    const shells = getShells(orbital);
-
-
-    const shellHTML = createShellDisplay(shells);
-
-
-    infoBox.innerHTML = `
-
-        <h2>${name} (${symbol})</h2>
-
-        <p>
-            <strong>Atomic Number:</strong>
-            ${number}
-        </p>
-
-        <p>
-            <strong>Atomic Mass:</strong>
-            ${mass}
-        </p>
-
-        <p>
-            <strong>Category:</strong>
-            ${category}
-        </p>
-
-        <p>
-            <strong>Period:</strong>
-            ${period}
-        </p>
-
-        <p>
-            <strong>Group:</strong>
-            ${group}
-        </p>
-
-
-        <hr>
-
-
-        <h3>⚛️ Electron Configuration</h3>
-
-        <p>
-            <strong>Orbital configuration:</strong>
-            ${orbital}
-        </p>
-
-
-        <div class="shell-container">
-
-            ${shellHTML}
-
-        </div>
-
-
-        <h3>🔬 Electron Shell Diagram</h3>
-
-        <canvas
-            id="electronCanvas"
-            width="400"
-            height="400">
-        </canvas>
-
-
-        <hr>
-
-
-        <h3>💡 Did You Know?</h3>
-
-        <p>${fact}</p>
-
-    `;
-
-
-    drawElectronShells(symbol, shells);
-
-
-    infoBox.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-}
-
-
-// ======================================================
-// ELECTRON SHELL DIAGRAM
-// ======================================================
-
-function drawElectronShells(symbol, shells) {
-
-    const canvas = document.getElementById("electronCanvas");
-
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-
-
-    // Nucleus
-    ctx.beginPath();
-
-    ctx.arc(
-        centerX,
-        centerY,
-        38,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fillStyle = "#555";
-    ctx.fill();
-
-
-    ctx.fillStyle = "white";
-
-    ctx.font = "bold 18px Arial";
-
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    ctx.fillText(
-        symbol,
-        centerX,
-        centerY
-    );
-
-
-    shells.forEach((electronCount, shellIndex) => {
-
-        const radius =
-            58 + shellIndex * 38;
-
-
-        // Orbit
-        ctx.beginPath();
-
-        ctx.arc(
-            centerX,
-            centerY,
-            radius,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.strokeStyle = "#888";
-
-        ctx.lineWidth = 2;
-
-        ctx.stroke();
-
-
-        // Electrons
-        for (
-            let i = 0;
-            i < electronCount;
-            i++
-        ) {
-
-            const angle =
-                (Math.PI * 2 * i) /
-                electronCount;
-
-
-            const x =
-                centerX +
-                radius *
-                Math.cos(angle);
-
-
-            const y =
-                centerY +
-                radius *
-                Math.sin(angle);
-
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                6,
-                0,
-                Math.PI * 2
-            );
-
-
-            ctx.fillStyle = "#333";
-
-            ctx.fill();
-
-        }
-
-    });
 
 }
 
 
-// ======================================================
-// SEARCH
-// ======================================================
-
-if (search) {
-
-    search.addEventListener(
-        "input",
-        () => {
-
-            const value =
-                search.value
-                    .toLowerCase()
-                    .trim();
-
-
-            const filtered =
-                elements.filter(element => {
-
-                    const number =
-                        String(element[0]);
-
-
-                    const symbol =
-                        element[1]
-                            .toLowerCase();
-
-
-                    const name =
-                        element[2]
-                            .toLowerCase();
-
-
-                    return (
-                        name.includes(value) ||
-                        symbol.includes(value) ||
-                        number === value
-                    );
-
-                });
-
-
-            displayElements(filtered);
-
-        }
-    );
-
-}
-
-
-// ======================================================
-// DARK MODE
-// ======================================================
-
-if (darkMode) {
-
-    darkMode.addEventListener(
-        "click",
-        () => {
-
-            document.body.classList.toggle(
-                "dark"
-            );
-
-
-            if (
-                document.body.classList.contains(
-                    "dark"
-                )
-            ) {
-
-                darkMode.textContent =
-                    "☀️ Light Mode";
-
-            } else {
-
-                darkMode.textContent =
-                    "🌙 Dark Mode";
-
-            }
-
-        }
-    );
-
-}
-
-
-// ======================================================
-// START TABLE
-// ======================================================
+// ============================================================
+// SHOW ALL ELEMENTS
+// ============================================================
 
 displayElements(elements);
 
 
-// ======================================================
-// MAKE FACTS AVAILABLE GLOBALLY
-// ======================================================
+// ============================================================
+// SEARCH
+// ============================================================
 
-window.facts = facts;
-window.elements = elements;
+if (search) {
+
+    search.addEventListener("input", () => {
+
+        const value =
+            search.value
+                .toLowerCase()
+                .trim();
+
+
+        const filtered =
+            elements.filter(element => {
+
+                const number =
+                    String(element[0]);
+
+                const symbol =
+                    element[1].toLowerCase();
+
+                const name =
+                    element[2].toLowerCase();
+
+
+                return (
+                    name.includes(value) ||
+                    symbol.includes(value) ||
+                    number === value
+                );
+
+            });
+
+
+        displayElements(filtered);
+
+    });
+
+}
+
+
+// ============================================================
+// DARK MODE
+// ============================================================
+
+if (darkMode) {
+
+    darkMode.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark");
+
+
+        if (
+            document.body.classList.contains("dark")
+        ) {
+
+            darkMode.textContent =
+                "☀️ Light Mode";
+
+        } else {
+
+            darkMode.textContent =
+                "🌙 Dark Mode";
+
+        }
+
+    });
+
+}
