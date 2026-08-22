@@ -625,6 +625,44 @@ const electronConfigurations = {
     Og:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶"
 };
 
+// NEW: State of matter
+const states = {
+    H:"Gas", He:"Gas", Li:"Solid", Be:"Solid", B:"Solid", C:"Solid", N:"Gas", O:"Gas",
+    F:"Gas", Ne:"Gas", Na:"Solid", Mg:"Solid", Al:"Solid", Si:"Solid", P:"Solid", S:"Solid",
+    Cl:"Gas", Ar:"Gas", K:"Solid", Ca:"Solid", Sc:"Solid", Ti:"Solid", V:"Solid", Cr:"Solid",
+    Mn:"Solid", Fe:"Solid", Co:"Solid", Ni:"Solid", Cu:"Solid", Zn:"Solid", Ga:"Solid", Ge:"Solid",
+    As:"Solid", Se:"Solid", Br:"Liquid", Kr:"Gas", Rb:"Solid", Sr:"Solid", Y:"Solid", Zr:"Solid",
+    Nb:"Solid", Mo:"Solid", Tc:"Solid", Ru:"Solid", Rh:"Solid", Pd:"Solid", Ag:"Solid", Cd:"Solid",
+    In:"Solid", Sn:"Solid", Sb:"Solid", Te:"Solid", I:"Solid", Xe:"Gas", Cs:"Solid", Ba:"Solid",
+    La:"Solid", Ce:"Solid", Pr:"Solid", Nd:"Solid", Pm:"Solid", Sm:"Solid", Eu:"Solid", Gd:"Solid",
+    Tb:"Solid", Dy:"Solid", Ho:"Solid", Er:"Solid", Tm:"Solid", Yb:"Solid", Lu:"Solid", Hf:"Solid",
+    Ta:"Solid", W:"Solid", Re:"Solid", Os:"Solid", Ir:"Solid", Pt:"Solid", Au:"Solid", Hg:"Liquid",
+    Tl:"Solid", Pb:"Solid", Bi:"Solid", Po:"Solid", At:"Solid", Rn:"Gas", Fr:"Solid", Ra:"Solid",
+    Ac:"Solid", Th:"Solid", Pa:"Solid", U:"Solid", Np:"Solid", Pu:"Solid", Am:"Solid", Cm:"Solid",
+    Bk:"Solid", Cf:"Solid", Es:"Solid", Fm:"Solid", Md:"Solid", No:"Solid", Lr:"Solid",
+    Rf:"Solid", Db:"Solid", Sg:"Solid", Bh:"Solid", Hs:"Solid", Mt:"Solid", Ds:"Solid",
+    Rg:"Solid", Cn:"Solid", Nh:"Solid", Fl:"Solid", Mc:"Solid", Lv:"Solid", Ts:"Solid", Og:"Gas"
+};
+
+// NEW: Discovery year
+const discoveryYears = {
+    H:1766, He:1895, Li:1817, Be:1798, B:1808, C:"Ancient", N:1772, O:1774,
+    F:1886, Ne:1898, Na:1807, Mg:1755, Al:1825, Si:1824, P:1669, S:"Ancient",
+    Cl:1774, Ar:1894, K:1807, Ca:1808, Sc:1879, Ti:1791, V:1801, Cr:1797,
+    Mn:1774, Fe:"Ancient", Co:1735, Ni:1751, Cu:"Ancient", Zn:"Ancient", Ga:1875, Ge:1886,
+    As:"Ancient", Se:1817, Br:1826, Kr:1898, Rb:1861, Sr:1790, Y:1794, Zr:1789,
+    Nb:1801, Mo:1778, Tc:1937, Ru:1844, Rh:1803, Pd:1803, Ag:"Ancient", Cd:1817,
+    In:1863, Sn:"Ancient", Sb:"Ancient", Te:1782, I:1811, Xe:1898, Cs:1860, Ba:1808,
+    La:1839, Ce:1803, Pr:1885, Nd:1885, Pm:1945, Sm:1879, Eu:1901, Gd:1880,
+    Tb:1843, Dy:1886, Ho:1878, Er:1843, Tm:1879, Yb:1878, Lu:1907, Hf:1923,
+    Ta:1802, W:1783, Re:1925, Os:1803, Ir:1803, Pt:1735, Au:"Ancient", Hg:"Ancient",
+    Tl:1861, Pb:"Ancient", Bi:1753, Po:1898, At:1940, Rn:1900, Fr:1939, Ra:1898,
+    Ac:1899, Th:1829, Pa:1913, U:1789, Np:1940, Pu:1940, Am:1944, Cm:1944,
+    Bk:1949, Cf:1950, Es:1952, Fm:1952, Md:1955, No:1958, Lr:1961,
+    Rf:1969, Db:1970, Sg:1974, Bh:1981, Hs:1984, Mt:1982, Ds:1994,
+    Rg:1994, Cn:1996, Nh:2003, Fl:1998, Mc:2003, Lv:2000, Ts:2010, Og:2002
+};
+
 const table = document.getElementById("periodic-table");
 const infoBox = document.getElementById("info-box");
 const search = document.getElementById("search");
@@ -692,6 +730,8 @@ function displayElements(list) {
         box.addEventListener("click", () => {
             const fact = facts[symbol] || "Information about this element is being added.";
             const configuration = electronConfigurations[symbol] || "Configuration not available yet.";
+            const state = states[symbol] || "Unknown";
+            const year = discoveryYears[symbol] || "Unknown";
             const shells = getShellDistribution(number);
 
             infoBox.innerHTML = `
@@ -701,6 +741,8 @@ function displayElements(list) {
                 <p><strong>Category:</strong> ${category}</p>
                 <p><strong>Period:</strong> ${period}</p>
                 <p><strong>Group:</strong> ${group}</p>
+                <p><strong>State of Matter:</strong> ${state}</p>
+                <p><strong>Discovered:</strong> ${year}</p>
                 <hr>
                 <h3>⚛️ Electron Configuration</h3>
                 <p><strong>Orbital configuration:</strong> ${configuration}</p>
@@ -740,7 +782,7 @@ darkModeBtn.addEventListener("click", () => {
     darkModeBtn.textContent = document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
 });
 
-// ===================== IMPROVED QUIZ =====================
+// ===================== QUIZ =====================
 let score = 0;
 let highScore = localStorage.getItem("periodicHighScore") || 0;
 let answered = false;
