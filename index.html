@@ -265,8 +265,26 @@ body.dark .nucleus {
 body.dark #quiz-box { background: #242424; color: white; }
 
 #quiz-box h2 { margin-top: 0; font-size: 26px; }
-#score { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
-#question { font-size: 20px; margin: 20px 0; min-height: 50px; }
+#score { font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+
+#high-score {
+    font-size: 16px;
+    margin: 5px 0 10px;
+    color: #1565c0;
+}
+
+body.dark #high-score { color: #64b5f6; }
+
+#timer {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e65100;
+    margin: 8px 0;
+}
+
+body.dark #timer { color: #ffb74d; }
+
+#question { font-size: 20px; margin: 20px 0; min-height: 60px; }
 
 #answers {
     display: grid;
@@ -376,6 +394,8 @@ body.dark #next-question {
 <div id="quiz-box">
     <h2>🧠 Element Quiz</h2>
     <p id="score">Score: 0</p>
+    <p id="high-score">High Score: 0</p>
+    <p id="timer">Time: 15s</p>
     <div id="question">Click "Start Quiz" to begin!</div>
     <div id="answers"></div>
     <p id="quiz-result"></p>
@@ -720,17 +740,26 @@ darkModeBtn.addEventListener("click", () => {
     darkModeBtn.textContent = document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
 });
 
-// ===================== QUIZ =====================
+// ===================== IMPROVED QUIZ =====================
 let score = 0;
+let highScore = localStorage.getItem("periodicHighScore") || 0;
 let answered = false;
 let correctAnswer = "";
+let timeLeft = 15;
+let timerInterval = null;
+let questionCount = 0;
+const maxQuestions = 10;
 
 const quizQuestion = document.getElementById("question");
 const quizAnswers = document.getElementById("answers");
 const scoreDisplay = document.getElementById("score");
+const highScoreDisplay = document.getElementById("high-score");
 const quizResult = document.getElementById("quiz-result");
+const timerDisplay = document.getElementById("timer");
 const startBtn = document.getElementById("start-quiz");
 const nextBtn = document.getElementById("next-question");
+
+highScoreDisplay.textContent = "High Score: " + highScore;
 
 function getRandomElement() {
     return elements[Math.floor(Math.random() * elements.length)];
@@ -740,39 +769,119 @@ function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5);
 }
 
+function startTimer() {
+    clearInterval(timerInterval);
+    timeLeft = 15;
+    timerDisplay.textContent = "Time: " + timeLeft + "s";
+    timerDisplay.style.color = "#e65100";
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = "Time: " + timeLeft + "s";
+
+        if (timeLeft <= 5) {
+            timerDisplay.style.color = "#c62828";
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            if (!answered) {
+                answered = true;
+                quizResult.textContent = "⏰ Time's up! Correct answer: " + correctAnswer;
+
+                document.querySelectorAll(".quiz-answer").forEach(b => {
+                    b.style.pointerEvents = "none";
+                    if (b.textContent === correctAnswer) {
+                        b.classList.add("correct");
+                    }
+                });
+
+                nextBtn.style.display = "inline-block";
+            }
+        }
+    }, 1000);
+}
+
 function newQuestion() {
+    if (questionCount >= maxQuestions) {
+        endQuiz();
+        return;
+    }
+
+    questionCount++;
     answered = false;
     quizResult.textContent = "";
     quizAnswers.innerHTML = "";
     nextBtn.style.display = "none";
 
     const correct = getRandomElement();
-    const [number, symbol, name] = correct;
+    const [number, symbol, name, mass, category, period, group] = correct;
 
-    const type = Math.floor(Math.random() * 3);
+    const type = Math.floor(Math.random() * 6);
     let questionText = "";
+    let optionsList = [];
 
     if (type === 0) {
         questionText = `What is the name of the element with symbol <strong>${symbol}</strong>?`;
         correctAnswer = name;
-    } else if (type === 1) {
+        optionsList = [name];
+        while (optionsList.length < 4) {
+            const r = getRandomElement()[2];
+            if (!optionsList.includes(r)) optionsList.push(r);
+        }
+    } 
+    else if (type === 1) {
         questionText = `What is the symbol of <strong>${name}</strong>?`;
         correctAnswer = symbol;
-    } else {
+        optionsList = [symbol];
+        while (optionsList.length < 4) {
+            const r = getRandomElement()[1];
+            if (!optionsList.includes(r)) optionsList.push(r);
+        }
+    } 
+    else if (type === 2) {
         questionText = `Which element has atomic number <strong>${number}</strong>?`;
         correctAnswer = name;
+        optionsList = [name];
+        while (optionsList.length < 4) {
+            const r = getRandomElement()[2];
+            if (!optionsList.includes(r)) optionsList.push(r);
+        }
+    } 
+    else if (type === 3) {
+        questionText = `What category does <strong>${name}</strong> belong to?`;
+        correctAnswer = category;
+        const allCategories = ["alkali","alkaline","transition","post-transition","metalloid","nonmetal","halogen","noble","lanthanide","actinide"];
+        optionsList = [category];
+        while (optionsList.length < 4) {
+            const r = allCategories[Math.floor(Math.random() * allCategories.length)];
+            if (!optionsList.includes(r)) optionsList.push(r);
+        }
+    } 
+    else if (type === 4) {
+        questionText = `In which period is <strong>${name} (${symbol})</strong> located?`;
+        correctAnswer = String(period);
+        optionsList = [String(period)];
+        while (optionsList.length < 4) {
+            const r = String(Math.floor(Math.random() * 7) + 1);
+            if (!optionsList.includes(r)) optionsList.push(r);
+        }
+    } 
+    else {
+        const shells = getShellDistribution(number);
+        const outerElectrons = shells[shells.length - 1];
+        questionText = `How many electrons are in the outermost shell of <strong>${name}</strong>?`;
+        correctAnswer = String(outerElectrons);
+        optionsList = [String(outerElectrons)];
+        while (optionsList.length < 4) {
+            const r = String(Math.floor(Math.random() * 8) + 1);
+            if (!optionsList.includes(r)) optionsList.push(r);
+        }
     }
 
-    quizQuestion.innerHTML = questionText;
+    quizQuestion.innerHTML = `Question ${questionCount}/${maxQuestions}<br><br>${questionText}`;
 
-    const options = new Set([correctAnswer]);
-    while (options.size < 4) {
-        const random = getRandomElement();
-        if (type === 1) options.add(random[1]);
-        else options.add(random[2]);
-    }
-
-    shuffle([...options]).forEach(option => {
+    shuffle(optionsList).forEach(option => {
         const btn = document.createElement("button");
         btn.className = "quiz-answer";
         btn.textContent = option;
@@ -780,6 +889,7 @@ function newQuestion() {
         btn.addEventListener("click", () => {
             if (answered) return;
             answered = true;
+            clearInterval(timerInterval);
 
             if (option === correctAnswer) {
                 btn.classList.add("correct");
@@ -789,21 +899,52 @@ function newQuestion() {
             } else {
                 btn.classList.add("wrong");
                 quizResult.textContent = "❌ Wrong! Correct answer: " + correctAnswer;
+
                 document.querySelectorAll(".quiz-answer").forEach(b => {
-                    if (b.textContent === correctAnswer) b.classList.add("correct");
+                    if (b.textContent === correctAnswer) {
+                        b.classList.add("correct");
+                    }
                 });
             }
 
-            document.querySelectorAll(".quiz-answer").forEach(b => b.style.pointerEvents = "none");
+            document.querySelectorAll(".quiz-answer").forEach(b => {
+                b.style.pointerEvents = "none";
+            });
+
             nextBtn.style.display = "inline-block";
         });
 
         quizAnswers.appendChild(btn);
     });
+
+    startTimer();
+}
+
+function endQuiz() {
+    clearInterval(timerInterval);
+    quizAnswers.innerHTML = "";
+    nextBtn.style.display = "none";
+    timerDisplay.textContent = "";
+
+    let message = "";
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("periodicHighScore", highScore);
+        highScoreDisplay.textContent = "High Score: " + highScore;
+        message = `🏆 New High Score! You scored ${score}/${maxQuestions}`;
+    } else {
+        message = `Quiz finished! You scored ${score}/${maxQuestions}`;
+    }
+
+    quizQuestion.innerHTML = message;
+    quizResult.textContent = "";
+    startBtn.style.display = "inline-block";
+    startBtn.textContent = "Play Again";
 }
 
 startBtn.addEventListener("click", () => {
     score = 0;
+    questionCount = 0;
     scoreDisplay.textContent = "Score: 0";
     startBtn.style.display = "none";
     newQuestion();
