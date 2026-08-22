@@ -30,7 +30,7 @@ body.dark header p { color: #bbb; }
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    margin: 25px 0 40px;
+    margin: 25px 0 30px;
 }
 
 #search {
@@ -61,7 +61,7 @@ body.dark #search {
 
 body.dark #darkMode { background: #eee; color: #111; }
 
-.categories { text-align: center; margin-bottom: 35px; }
+.categories { text-align: center; margin-bottom: 20px; }
 .categories h2 { font-size: 22px; margin-bottom: 15px; }
 
 .legend {
@@ -86,6 +86,54 @@ body.dark #darkMode { background: #eee; color: #111; }
     display: inline-block;
     border: 1px solid #777;
     border-radius: 3px;
+}
+
+/* FILTER BUTTONS */
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 25px auto 35px;
+    max-width: 1050px;
+}
+
+.filter-btn {
+    padding: 9px 16px;
+    border: 2px solid #888;
+    border-radius: 20px;
+    background: white;
+    color: #222;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+.filter-btn.active {
+    background: #222;
+    color: white;
+    border-color: #222;
+}
+
+body.dark .filter-btn {
+    background: #333;
+    color: white;
+    border-color: #666;
+}
+
+body.dark .filter-btn:hover {
+    background: #444;
+}
+
+body.dark .filter-btn.active {
+    background: #eee;
+    color: #111;
+    border-color: #eee;
 }
 
 #periodic-table {
@@ -383,6 +431,21 @@ body.dark #next-question {
     </div>
 </div>
 
+<!-- CATEGORY FILTERS -->
+<div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="alkali">Alkali Metals</button>
+    <button class="filter-btn" data-filter="alkaline">Alkaline Earth</button>
+    <button class="filter-btn" data-filter="transition">Transition</button>
+    <button class="filter-btn" data-filter="post-transition">Post-Transition</button>
+    <button class="filter-btn" data-filter="metalloid">Metalloids</button>
+    <button class="filter-btn" data-filter="nonmetal">Nonmetals</button>
+    <button class="filter-btn" data-filter="halogen">Halogens</button>
+    <button class="filter-btn" data-filter="noble">Noble Gases</button>
+    <button class="filter-btn" data-filter="lanthanide">Lanthanides</button>
+    <button class="filter-btn" data-filter="actinide">Actinides</button>
+</div>
+
 <div id="periodic-table"></div>
 
 <div id="info-box">
@@ -625,7 +688,6 @@ const electronConfigurations = {
     Og:"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶"
 };
 
-// NEW: State of matter
 const states = {
     H:"Gas", He:"Gas", Li:"Solid", Be:"Solid", B:"Solid", C:"Solid", N:"Gas", O:"Gas",
     F:"Gas", Ne:"Gas", Na:"Solid", Mg:"Solid", Al:"Solid", Si:"Solid", P:"Solid", S:"Solid",
@@ -644,7 +706,6 @@ const states = {
     Rg:"Solid", Cn:"Solid", Nh:"Solid", Fl:"Solid", Mc:"Solid", Lv:"Solid", Ts:"Solid", Og:"Gas"
 };
 
-// NEW: Discovery year
 const discoveryYears = {
     H:1766, He:1895, Li:1817, Be:1798, B:1808, C:"Ancient", N:1772, O:1774,
     F:1886, Ne:1898, Na:1807, Mg:1755, Al:1825, Si:1824, P:1669, S:"Ancient",
@@ -767,6 +828,7 @@ function displayElements(list) {
 
 displayElements(elements);
 
+// Search
 search.addEventListener("input", () => {
     const value = search.value.toLowerCase().trim();
     const filtered = elements.filter(el => {
@@ -777,9 +839,30 @@ search.addEventListener("input", () => {
     displayElements(filtered);
 });
 
+// Dark mode
 darkModeBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     darkModeBtn.textContent = document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
+});
+
+// ===================== CATEGORY FILTERS =====================
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const filter = btn.getAttribute("data-filter");
+        search.value = "";
+
+        if (filter === "all") {
+            displayElements(elements);
+        } else {
+            const filtered = elements.filter(el => el[4] === filter);
+            displayElements(filtered);
+        }
+    });
 });
 
 // ===================== QUIZ =====================
